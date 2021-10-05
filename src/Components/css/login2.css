@@ -72,13 +72,13 @@ SELECTION STYLING
 /*******************
 BODY STYLING
 *******************/
-body {
+/* body {
 	background: #EEE;
 	font-family: sans-serif;
 	font-weight:300;
 	text-align: left;
 	text-decoration: none;
-}
+} */
 
 
 
@@ -535,7 +535,7 @@ FOOTER
 
 }
 
-@import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap');
+
 
 * {
     margin: 0;
@@ -544,16 +544,16 @@ FOOTER
     text-decoration: none;
     box-sizing: border-box
 }
-
+/* 
 body {
     font-family: 'Montserrat', sans-serif;
-    background: url(https://i.imgur.com/3Ad4Atf.jpg);
+   
     background-position: center;
     background-size: cover;
     height: 100vh
-}
+} */
 
-nav {
+.redes-slider {
     position: fixed;
     width: 60px;
     margin-top: 150px;
@@ -561,17 +561,17 @@ nav {
     box-shadow: 2px 2px 8px 0px rgba(0, 0, 0, .4)
 }
 
-nav ul {
+.redes-slider ul {
     margin-top: 0;
     margin-bottom: 0rem
 }
 
-nav li {
+.redes-slider li {
     height: 45px;
     position: relative
 }
 
-nav li a {
+.redes-slider li a {
     color: #fff !important;
     display: block;
     height: 100%;
@@ -583,52 +583,52 @@ nav li a {
     text-decoration: none !important
 }
 
-nav li:nth-child(1) a {
+.redes-slider li:nth-child(1) a {
     background: #4267B2
 }
 
-nav li:nth-child(2) a {
+.redes-slider li:nth-child(2) a {
     background: #1DA1F2
 }
 
-nav li:nth-child(3) a {
+.redes-slider li:nth-child(3) a {
     background: #E1306C
 }
 
-nav li:nth-child(4) a {
+.redes-slider li:nth-child(4) a {
     background: #ef3446
 }
 
-nav li:nth-child(5) a {
+.redes-slider li:nth-child(5) a {
     background: #333
 }
 
-nav li:nth-child(6) a {
+.redes-slider li:nth-child(6) a {
     background: #ff0000
 }
 
-nav li a i {
+.redes-slider li a i {
     position: absolute;
     top: 14px;
     left: 24px;
     font-size: 15px
 }
 
-ul li a span {
+.redes-slider ul li a span {
     display: none;
     font-weight: bold;
     letter-spacing: 1px;
     text-transform: uppercase
 }
 
-a:hover {
+.redes-slider a:hover {
     z-index: 1;
     width: 200px;
     border-bottom: 1px solid rgba(0, 0, 0, .5);
     box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3)
 }
 
-ul li:hover a span {
+.redes-slider ul li:hover a span {
     padding-left: 30%;
     display: block;
     font-size: 15px

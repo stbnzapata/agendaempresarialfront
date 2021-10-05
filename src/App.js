@@ -7,8 +7,8 @@ import Pagina_inicio from './Components/pagina_inicio';
 function App() {
   return (
     <div className="App">
-      {/* <Login/> */}
-      <Pagina_inicio/>
+      <Login/>
+      {/* <Pagina_inicio/> */}
     </div>
   );
 }
