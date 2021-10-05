@@ -1,0 +1,87 @@
+img, svg .logo {
+    vertical-align: middle;
+    width: 46%;
+}
+
+.header {
+
+    /* width: 100%; */
+    text-align: center;
+    margin: 0 auto;
+    display: block;
+    background: #faf8f8;
+
+}
+
+.header a.logo{
+
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+.header .mensaje{
+
+    display: inline-block;
+    
+}
+
+
+.header .navbar {
+    
+    display: inline-block;
+    
+}
+
+.header nav ul li a {
+    
+    padding: .5rem 1rem !important;
+    display: block;
+    
+}
+
+.header nav ul li button {
+    
+    margin: 0 0 0 20rem;
+    width: 37% !important;
+}
+
+.bus-btn .row {
+    
+    padding: 3rem 0rem 0rem;
+}
+
+.bus-btn .buscador {
+    
+    display: inline-block;
+    width: 90%;
+}
+
+.bus-btn .buscador .form-outline {
+    
+    width: 44%;
+}
+
+.bus-btn .ingresar {
+    
+    display: inline-block;
+
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #125570;
+    border-color: #125570;
+}
+
+.btn-check:focus+.btn-primary, .btn-primary:focus, .btn-primary:hover {
+    color: #fff;
+    background-color: #607eab;
+    border-color: #607eab;
+}
+
+
+
+
+
+
