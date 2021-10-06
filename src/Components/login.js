@@ -3,7 +3,6 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './media/logo.png';
 import './css/login2.css';
-// import './../node_modules/font-awesome/css/font-awesome.min.css'; 
 import 'font-awesome/css/font-awesome.min.css';
 
 function valAcceso(forma, param) {
@@ -107,7 +106,7 @@ export default function Login() {
     return (
         <div>
 
-            <nav>
+            <nav className="redes-slider">
                 <ul>
                     <li><a href="https://www.facebook.com/" target="_black"><i class="fa fa-facebook-f"></i><span>Facebook</span></a></li>
                     <li><a href="https://twitter.com/?lang=es" target="_black"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
