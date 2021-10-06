@@ -1,9 +1,14 @@
 import React from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './media/logo.png';
+import logo from '../media/logo.png';
 import "../css/header.css";
+import { app } from '../fb';
 
 export default function Header() {
+
+    const cerrarSesion = () => {
+        app.auth().signOut();
+    }
 
     return (
         <div>
@@ -37,7 +42,7 @@ export default function Header() {
                                 <a className="nav-link">Usuarios</a>
                             </li>
                             <li className="nav-item">
-                                <button type="button" className="btn btn-danger">Cerrar Sesion</button>
+                                <button type="button" className="btn btn-danger" onClick={cerrarSesion}>Cerrar Sesion</button>
                             </li>
 
                         </ul>
