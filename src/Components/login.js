@@ -1,8 +1,8 @@
 
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import logo from './media/logo.png';
-import './css/login2.css';
+import logo from '../media/logo.png';
+import '../css/login2.css';
 import 'font-awesome/css/font-awesome.min.css';
 
 function valAcceso(forma, param) {

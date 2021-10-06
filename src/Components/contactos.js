@@ -1,6 +1,6 @@
 import React from 'react';
 // import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/contactos.css';
+import '../css/contactos.css';
 
 export default function Contactos() {
 

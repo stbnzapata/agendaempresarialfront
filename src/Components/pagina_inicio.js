@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './css/contactos.css';
+import '../css/contactos.css';
 import Footer from './footer';
 import Header from './header';
 import Contactos from './contactos';
