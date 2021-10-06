@@ -1,5 +1,5 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './media/logo.png';
 import "./css/header.css";
 
@@ -10,7 +10,7 @@ export default function Header() {
             <div className="container-fluid">
                 <div className="row header">
                     <a className="navbar-brand logo col-2" href="#">
-                        <img src={logo} />
+                        <img src={logo} alt="Logo"/>
                     </a>
 
                     {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,7 +20,7 @@ export default function Header() {
                         </button> */}
 
                     <div className="mensaje col-2">
-                        <p className="ml-5"> Bienvenido(a): Administrador</p>
+                        <p> Bienvenido(a): Administrador</p>
                     </div>
 
                     <nav className="navbar navbar-expand-lg navbar-light bg-light col-6">

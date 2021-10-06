@@ -1,12 +1,10 @@
 
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './media/logo.png';
 import './css/login2.css';
 // import './../node_modules/font-awesome/css/font-awesome.min.css'; 
 import 'font-awesome/css/font-awesome.min.css';
-
-
 
 function valAcceso(forma, param) {
 
