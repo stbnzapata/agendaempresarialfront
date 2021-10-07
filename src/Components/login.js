@@ -217,8 +217,7 @@ export default function Login(props) {
                             </form>
 
                             <div class="footer" valign="bottom">
-                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"} className="btn btn-dark mt-5"
-                                    onClick={() => setIsRegistrando(!isRegistrando)}
+                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"}          className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)}
                                 />
                             </div>
 
