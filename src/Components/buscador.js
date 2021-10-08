@@ -25,7 +25,7 @@ export default function Buscador() {
                                     {/* <label className="form-label" for="form1">Buscar</label> */}
                                 </div>
                                 <button type="button" className="btn btn-primary">
-                                    <i className="fas fa-search">Buscar</i>
+                                   Buscar
                                 </button>
                             </div>
                         </div>
@@ -72,12 +72,14 @@ export default function Buscador() {
                                     <FormGroup>
                                         <Label for="ciudad">Ciudad</Label>
                                         <Input type="text" id="ciudad" />
-                                    </FormGroup>
-                                    
+                                    </FormGroup>                                   
                                     
                                 </ModalBody>
                                 <ModalFooter>
-                                <Button onClick={handleClose} type="button" className="btn btn-primary">
+                                <Button onClick={handleClose} type="button" className="btn btn-primary" style={{width:'100px', marginRight:'20px'}}>
+                                    Guardar
+                                </Button>
+                                <Button onClick={handleClose} type="button" className="btn btn-primary" style={{width:'100px'}}>
                                     cerrar
                                 </Button>
                                 </ModalFooter>                                
