@@ -3,16 +3,30 @@ import React from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import '../css/header.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
+import { getContactos } from '../services';
 
 export default function Buscador() {
 
     // const [state, setState] = React.useState(false);
 
     const [show, setShow] = React.useState(false);
+    const [contactos, setContactos] = React.useState([])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-    
+
+    React.useEffect(() => {
+        async function loadContactos() {
+            const response = await getContactos()
+            console.log(response)
+            return response
+            if (response.status === 200){
+                setContactos(response.data)
+            }
+        }
+        loadContactos();
+    }, [])
+
     return (
         <div>
             <div className="container bus-btn">
@@ -79,8 +93,8 @@ export default function Buscador() {
                                 <Button onClick={handleClose} type="button" className="btn btn-primary" style={{width:'100px', marginRight:'20px'}}>
                                     Guardar
                                 </Button>
-                                <Button onClick={handleClose} type="button" className="btn btn-primary" style={{width:'100px'}}>
-                                    cerrar
+                                <Button onClick={handleClose} type="button" className="btn btn-danger" style={{width:'100px'}}>
+                                    Cerrar
                                 </Button>
                                 </ModalFooter>                                
                             </Modal>
