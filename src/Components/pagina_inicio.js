@@ -14,7 +14,7 @@ export default function PaginaInicio() {
            <Header/>
            <Buscador/>
             <section>
-                <Contactos/>
+                
             </section>       
            <Footer/>
         </div>

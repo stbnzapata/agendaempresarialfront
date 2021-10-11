@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/contactos.css';
 import Buscador from './buscador'
 
-export default function Contactos() {
+export default function Contactos(constactos) {
 
     if(Buscador.length === []){
         return (

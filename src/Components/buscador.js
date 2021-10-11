@@ -2,30 +2,68 @@ import React from 'react';
 // import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../css/header.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
-import { getContactos } from '../services';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label, Form } from 'reactstrap';
+import { getContactos, saveContacto } from '../services';
+import Contactos from './contactos';
 
 export default function Buscador() {
 
     // const [state, setState] = React.useState(false);
 
     const [show, setShow] = React.useState(false);
-    const [contactos, setContactos] = React.useState([])
+    const [contactos, setContactos] = React.useState([]);
+    const [formValues, setFormValues] = React.useState({
+        Nombre:'',
+        Apellido:'',
+        Compañia:0,
+        Cargo:'',
+        Email:'',
+        Celular:'',
+        Direccion:'',
+        Ciudad:''
+    });
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => { 
+        setFormValues({});
+        setShow(false);
+    }
     const handleShow = () => setShow(true);
 
-    React.useEffect(() => {
-        async function loadContactos() {
-            const response = await getContactos()
-            console.log(response)
-            return response
-            if (response.status === 200){
-                setContactos(response.data)
-            }
+    async function loadContactos() {
+        const response = await getContactos()
+        console.log(response)
+        return response
+        if (response.status === 200){
+            setContactos(response.data)
         }
+    }
+
+    React.useEffect(() => {
         loadContactos();
     }, [])
+
+    const handleChange = (event) => {
+        const {name, value} = event.target;        
+        setFormValues({...formValues, [name]: value});
+    }
+
+    const _handleSubmit = (event) =>{
+        event.preventDefault();
+        handleSubmit({...formValues})        
+    }
+
+    const handleSubmit = async (data) =>{
+        try {
+            await saveContacto(data);
+            loadContactos();
+            setFormValues({});
+            setShow(false);
+            alert('Los datos del contacto se han guardado satisfactoriamente.')   
+        } catch (error) {
+            console.log(error)
+        }
+                
+    }
 
     return (
         <div>
@@ -43,69 +81,68 @@ export default function Buscador() {
                                 </button>
                             </div>
                         </div>
+                        
                         <div className="ingresar">
-                            {/* <button type="button" className="btn btn-primary">Ingresar</button> */}
-                            <Button onClick={handleShow} type="button" className="btn btn-primary">
+                            <Button id='botonVentanaModal' onClick={handleShow} type="button" className="btn btn-primary">
                                Ingresar
                             </Button>
-                            <Modal isOpen={show} onHide={handleClose}>
-                                <ModalHeader>
-                                    <div className="container">
-                                        <h1>Crear Contacto</h1>
-                                    </div>
-                                </ModalHeader>
-                                <ModalBody>
-                                    <FormGroup>
-                                        <Label for="nombre">Nombre</Label>
-                                        <Input type="text" id="nombre" />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="apellido">Apellido</Label>
-                                        <Input type="text" id="apellido" />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="compañia">Compañia</Label>
-                                        <Input type="text" id="compañia" />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="cargo">Cargo</Label>
-                                        <Input type="text" id="cargo" />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="email">Email</Label>
-                                        <Input type="email" id="email" />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="movil">Movil</Label>
-                                        <Input type="num" id="movil" />
-                                    </FormGroup>                                    
-                                    <FormGroup>
-                                        <Label for="direccion">Dirección</Label>
-                                        <Input type="text" id="direccion" />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="ciudad">Ciudad</Label>
-                                        <Input type="text" id="ciudad" />
-                                    </FormGroup>                                   
-                                    
-                                </ModalBody>
-                                <ModalFooter>
-                                <Button onClick={handleClose} type="button" className="btn btn-primary" style={{width:'100px', marginRight:'20px'}}>
-                                    Guardar
-                                </Button>
-                                <Button onClick={handleClose} type="button" className="btn btn-danger" style={{width:'100px'}}>
-                                    Cerrar
-                                </Button>
-                                </ModalFooter>                                
-                            </Modal>
+                            <Form id='formulario' onSubmit={_handleSubmit} handleSubmit={handleSubmit}>
+                                <Modal id='ventanaModal' isOpen={show} onHide={handleClose}>
+                                    <ModalHeader>
+                                        <div className="container">
+                                            <h1>Crear Contacto</h1>
+                                        </div>
+                                    </ModalHeader>
+                                    <ModalBody>
+                                        <FormGroup>
+                                            <Label for="nombre">Nombre</Label>
+                                            <Input type="text" id="nombre" name='Nombre' value={formValues.Nombre} onChange={handleChange}/>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="apellido">Apellido</Label>
+                                            <Input type="text" id="apellido" name='Apellido' value={formValues.Apellido} onChange={handleChange} />
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="compañia">Compañia</Label>
+                                            <Input type="number" id="compañia" name='Compañia' value={formValues.Compañia} onChange={handleChange}/>
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="cargo">Cargo</Label>
+                                            <Input type="text" id="cargo" name='Cargo' value={formValues.Cargo} onChange={handleChange} />
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="email">Email</Label>
+                                            <Input type="email" id="email" name='Email' value={formValues.Email} onChange={handleChange} />
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="movil">Celular</Label>
+                                            <Input type="number" id="movil" name='Celular' value={formValues.Celular} onChange={handleChange}/>
+                                        </FormGroup>                                    
+                                        <FormGroup>
+                                            <Label for="direccion">Dirección</Label>
+                                            <Input type="text" id="direccion" name='Direccion' value={formValues.Direccion} onChange={handleChange} />
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="ciudad">Ciudad</Label>
+                                            <Input type="text" id="ciudad" name='Ciudad' value={formValues.Ciudad} onChange={handleChange}/>
+                                        </FormGroup>                                   
+                                        
+                                    </ModalBody>
+                                    <ModalFooter>
+                                        <Button onClick={_handleSubmit} type="button" className="btn btn-primary" style={{width:'100px', marginRight:'20px'}}>
+                                            Guardar
+                                        </Button>
+                                        <Button onClick={handleClose} type="button" className="btn btn-danger" style={{width:'100px'}}>
+                                            Cerrar
+                                        </Button>
+                                    </ModalFooter>                                
+                                </Modal>
+                            </Form>
                         </div>
-
-            
+                        <Contactos contactos={contactos} />            
                     </div>
                 </div>
             </div>
-
-
         </div>
 
     );
