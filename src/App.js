@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import Login from './Components/login';
 import PaginaInicio from './Components/pagina_inicio';
 import {app} from './fb';
@@ -6,7 +6,7 @@ import {app} from './fb';
 
 function App() {
 
-  const [usuario, setUsuario] = React.useState(null);
+  const [usuario, setUsuario] = useState(null);
   
   useEffect(()=>{
     app.auth().onAuthStateChanged((usuarioFirebase)=>{

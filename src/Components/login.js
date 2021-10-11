@@ -11,15 +11,15 @@ function valAcceso(forma, param) {
     let base = "document." + forma + ".";
     let partir = param.split(",");
     let n = partir.length;
-    let tam = n - 1;
+    // let tam = n - 1;
     let i;
     let bError = false;
-    let valor = "";
+    let valor = 1;
     let x;
     for (i = 0; i < n; i++) {
         x = eval(base + partir[i] + ".value");
         x = x.replace(/^\s+/, "");
-        bError = bError || (x == "");
+        bError = bError || (x === "");
         if (bError) {
             eval(base + partir[i] + ".value=''");
             document.getElementById('capax_' + partir[i]).style.display = "";
@@ -27,7 +27,7 @@ function valAcceso(forma, param) {
             valor = 1;
             break;
         } else {
-            valor = "";
+            valor = 1;
         }
     }
 
@@ -38,7 +38,6 @@ function valAcceso(forma, param) {
             valido.style.display = "";
             valido.innerText = "La contraseña debe contener mas de 8 caracteres";
             valor = 1;
-
         } else {
             valido.style.display = "none";
         }
@@ -59,7 +58,7 @@ function validarClave() {
     let cont = 0;
 
     while (!espacios && (cont < clave.length)) {
-        if (clave.charAt(cont) == " ")
+        if (clave.charAt(cont) === " ")
             espacios = true;
         cont++;
     }
@@ -154,29 +153,29 @@ export default function Login(props) {
 
             <nav className="redes-slider">
                 <ul>
-                    <li><a href="https://www.facebook.com/" target="_black"><i class="fa fa-facebook-f"></i><span>Facebook</span></a></li>
-                    <li><a href="https://twitter.com/?lang=es" target="_black"><i class="fa fa-twitter"></i><span>Twitter</span></a></li>
-                    <li><a href="https://www.instagram.com/" target="_black"><i class="fa fa-instagram"></i><span>Instagram</span></a></li>
-                    <li><a href="https://www.youtube.com/" target="_black"><i class="fa fa-youtube"></i><span>Youtube</span></a></li>
+                    <li><a href="https://www.facebook.com/" target="_black"><i className="fas fa-facebook-f"></i><span>Facebook</span></a></li>
+                    <li><a href="https://twitter.com/?lang=es" target="_black"><i className="fas fa-twitter"></i><span>Twitter</span></a></li>
+                    <li><a href="https://www.instagram.com/" target="_black"><i className="fas fa-instagram"></i><span>Instagram</span></a></li>
+                    <li><a href="https://www.youtube.com/" target="_black"><i className="fas fa-youtube"></i><span>Youtube</span></a></li>
                 </ul>
             </nav>
 
             <section id="cont_admin">
 
-                <section class="container">
-                    <div class="row justify-content-around">
-                        <div id="wrapper" class="col-lg-4 col-md-12">
+                <section className="container">
+                    <div className="row justify-content-around">
+                        <div id="wrapper" className="col-lg-4 col-md-12">
 
-                            <form action="" method="post" name="forml" id="forml" class="login-form" onSubmit={submitHandler}>
+                            <form action="" method="post" name="forml" id="forml" className="login-form" onSubmit={submitHandler}>
 
-                                <div class="logo_admin">
-                                    <img src={logo} />
+                                <div className="logo_admin">
+                                    <img src={logo} alt='logo' />
                                 </div>
 
                                 <h6 className="mb-2">{isRegistrando ? "REGISTRO" : "INICIO DE SESION"}</h6>
 
-                                <div class="content">
-                                    <input name="l" id="l" type="text" class="input username form-control" placeholder="Email *"
+                                <div className="content">
+                                    <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *"
                                         onChange={() => {
                                             validarEmail();
                                         }}
@@ -185,9 +184,9 @@ export default function Login(props) {
                                             ocultar('capax_error');
                                         }} />
 
-                                    <div class="user-icon"></div>
+                                    <div className="user-icon"></div>
 
-                                    <input name="c" id="c" type="password" class="input password form-control"
+                                    <input name="c" id="c" type="password" className="input password form-control"
                                         placeholder="Clave *"
                                         onChange={() => {
                                             validarClave();
@@ -197,16 +196,16 @@ export default function Login(props) {
                                             ocultar('capax_error');
                                         }} />
 
-                                    <div class="pass-icon"></div>
+                                    <div className="pass-icon"></div>
 
                                 </div>
 
-                                <div id="capax_l" style={{ display: "none" }} class="validacion">Debe ingresar el email</div>
-                                <div id="capax_c" style={{ display: "none" }} class="validacion">Debe ingresar la clave</div>
-                                <div id="capax_error" style={{ display: "none" }} class="validacion">Usuario o clave son
+                                <div id="capax_l" style={{ display: "none" }} className="validacion">Debe ingresar el email</div>
+                                <div id="capax_c" style={{ display: "none" }} className="validacion">Debe ingresar la clave</div>
+                                <div id="capax_error" style={{ display: "none" }} className="validacion">Usuario o clave son
                                     incorrectos</div>
 
-                                <div class="footer" valign="bottom">
+                                <div className="footer" valign="bottom">
                                     <input type="submit" name="botonera" value={isRegistrando ? "REGISTRARSE" : "INGRESAR"} className="btn btn-dark"
                                         onClick={() => {
                                             valAcceso('forml', 'l,c')
@@ -216,8 +215,8 @@ export default function Login(props) {
 
                             </form>
 
-                            <div class="footer" valign="bottom">
-                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"}          className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)}
+                            <div className="footer" valign="bottom">
+                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"} className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)}
                                 />
                             </div>
 
@@ -225,10 +224,10 @@ export default function Login(props) {
 
                     </div>
 
-                    <div class="row">
-                        <div class="info_contacto col-12">
-                            <div class="txt">
-                                <p class="mb-0">Tel&eacute;fono: (574) 000 00 00 | Direcci&oacute;n: Cra 0 Numero 100 Bloque0|
+                    <div className="row">
+                        <div className="info_contacto col-12">
+                            <div className="txt">
+                                <p className="mb-0">Tel&eacute;fono: (574) 000 00 00 | Direcci&oacute;n: Cra 0 Numero 100 Bloque0|
                                     Colombia</p>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-// import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../media/logo.png';
 import "../css/header.css";
 import { app } from '../fb';
@@ -11,12 +11,12 @@ export default function Header() {
     }
 
     return (
-        <div>
+        <div className="container mt-3" style={{marginLeft:175}}>
             <div className="container-fluid">
                 <div className="row header">
-                    <a className="navbar-brand logo col-2" href="#">
+                    <div className="navbar-brand logo col-2">
                         <img src={logo} alt="Logo"/>
-                    </a>
+                    </div>
 
                     {/* <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon">
@@ -24,23 +24,24 @@ export default function Header() {
                             </span>
                         </button> */}
 
-                    <div className="mensaje col-2">
+                    {/* <div className="mensaje col-2">
                         <p> Bienvenido(a): Administrador</p>
-                    </div>
+                    </div> */}
 
                     <nav className="navbar navbar-expand-lg navbar-light bg-light col-6">
-                        <ul className="navbar-nav me-auto mb-lg-0">
+                        <ul className="navbar-nav mr-auto mb-lg-0">
 
                             <li className="nav-item">
-                                <a className="nav-link active" href="#">Contactos</a>
+                                <h1>Agenda</h1>
                             </li>
 
                             <li className="nav-item">
-                                <a className="nav-link" >Compañias</a>
+                                <h1>Empresarial</h1>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <a className="nav-link">Usuarios</a>
-                            </li>
+                            </li> */}
+
                             <li className="nav-item">
                                 <button type="button" className="btn btn-danger" onClick={cerrarSesion}>Cerrar Sesion</button>
                             </li>

@@ -1,18 +1,17 @@
-import React from 'react';
-// import 'bootstrap/dist/css/bootstrap.css';
+import React, {useState, useEffect} from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../css/header.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label, Form } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
 import { getContactos, saveContacto } from '../services';
+import '../css/contactos.css';
 import Contactos from './contactos';
 
 export default function Buscador() {
 
-    // const [state, setState] = React.useState(false);
-
-    const [show, setShow] = React.useState(false);
-    const [contactos, setContactos] = React.useState([]);
-    const [formValues, setFormValues] = React.useState({
+    const [show, setShow] = useState(false);
+    const [contactos, setContactos] = useState([]);
+    const [formValues, setFormValues] = useState({
         Nombre:'',
         Apellido:'',
         Compañia:0,
@@ -32,13 +31,13 @@ export default function Buscador() {
     async function loadContactos() {
         const response = await getContactos()
         console.log(response)
-        return response
         if (response.status === 200){
             setContactos(response.data)
         }
+        return response
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         loadContactos();
     }, [])
 
@@ -54,13 +53,15 @@ export default function Buscador() {
 
     const handleSubmit = async (data) =>{
         try {
+            
             await saveContacto(data);
             loadContactos();
             setFormValues({});
             setShow(false);
             alert('Los datos del contacto se han guardado satisfactoriamente.')   
+          
         } catch (error) {
-            console.log(error)
+            alert('Ha ocurrido un error gusrdando los datos del contacto.')
         }
                 
     }
@@ -72,7 +73,7 @@ export default function Buscador() {
                     <div className="buscador-e">
                         <div className="buscador col-2">
                             <div className="input-group">
-                                <div className="form-outline">
+                                <div className="form-outline" style={{marginLeft:35}}>
                                     <input type="search" id="form1" className="form-control" value="Buscar" />
                                     {/* <label className="form-label" for="form1">Buscar</label> */}
                                 </div>
@@ -86,7 +87,7 @@ export default function Buscador() {
                             <Button id='botonVentanaModal' onClick={handleShow} type="button" className="btn btn-primary">
                                Ingresar
                             </Button>
-                            <Form id='formulario' onSubmit={_handleSubmit} handleSubmit={handleSubmit}>
+                            <form id='formulario' onSubmit={_handleSubmit} handleSubmit={handleSubmit}>
                                 <Modal id='ventanaModal' isOpen={show} onHide={handleClose}>
                                     <ModalHeader>
                                         <div className="container">
@@ -137,7 +138,7 @@ export default function Buscador() {
                                         </Button>
                                     </ModalFooter>                                
                                 </Modal>
-                            </Form>
+                            </form>
                         </div>
                         <Contactos contactos={contactos} />            
                     </div>
