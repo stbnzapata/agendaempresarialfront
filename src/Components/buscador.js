@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../css/header.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
-import { getContactos, saveContacto } from '../services';
+import { getContactos, saveContacto, peticionGet } from '../services';
 import '../css/contactos.css';
 import Contactos from './contactos';
 
@@ -19,7 +19,8 @@ export default function Buscador() {
         Email:'',
         Celular:'',
         Direccion:'',
-        Ciudad:''
+        Ciudad:'',
+        Estado:true
     });
 
     const handleClose = () => { 
@@ -30,16 +31,29 @@ export default function Buscador() {
 
     async function loadContactos() {
         const response = await getContactos()
-        console.log(response)
-        if (response.status === 200){
+        // console.log(response)
+        // if (response.status === 200){
             setContactos(response.data)
-        }
+        // }
         return response
     }
 
-    useEffect(() => {
+    // async function loadContacto() {
+    //     const response = await peticionGet()
+    //     console.log(response)
+    //     if (response.status === 200){
+    //         setContactos(response.data)
+    //     }
+    //     return response
+    // }
+
+    useEffect(() => {    
         loadContactos();
     }, [])
+
+    // useEffect(() => {
+    //     loadContacto();
+    // }, [])
 
     const handleChange = (event) => {
         const {name, value} = event.target;        
@@ -52,14 +66,12 @@ export default function Buscador() {
     }
 
     const handleSubmit = async (data) =>{
-        try {
-            
+        try {            
             await saveContacto(data);
             loadContactos();
             setFormValues({});
             setShow(false);
-            alert('Los datos del contacto se han guardado satisfactoriamente.')   
-          
+            alert('Los datos del contacto se han guardado satisfactoriamente.')
         } catch (error) {
             alert('Ha ocurrido un error gusrdando los datos del contacto.')
         }
@@ -74,7 +86,7 @@ export default function Buscador() {
                         <div className="buscador col-2">
                             <div className="input-group">
                                 <div className="form-outline" style={{marginLeft:35}}>
-                                    <input type="search" id="form1" className="form-control" value="Buscar" />
+                                    <input type="search" id="form1" className="form-control" />
                                     {/* <label className="form-label" for="form1">Buscar</label> */}
                                 </div>
                                 <button type="button" className="btn btn-primary">

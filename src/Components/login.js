@@ -103,6 +103,7 @@ function ocultar(capa) {
 
 
 export default function Login(props) {
+    
     const [isRegistrando, setIsRegistrando] = React.useState(false);
 
     const crearUsuario = (correo, contraseña) =>{
