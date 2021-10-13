@@ -50,13 +50,3 @@ export async function saveContacto(contactoData){
         console.log(error)
     }
 }
-
-// "Nombre": "Esteban",
-// "Apellido": "Muñoz",
-// "Compañia": 2,
-// "Cargo": "Ing software",
-// "Email": "Tatiana@Tatiana.com",
-// "Celular": "3136907810",
-// "Direccion": "Cra 7 2 -21",
-// "Ciudad": "Cali",
-// "Estado": true

@@ -40,7 +40,6 @@ export default function Buscador() {
         } catch (error) {
             console.log(error)
         }
-
     }
 
     // async function loadContacto() {
