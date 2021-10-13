@@ -19,8 +19,7 @@ export default function Buscador() {
         Email:'',
         Celular:'',
         Direccion:'',
-        Ciudad:'',
-        Estado:true
+        Ciudad:''
     });
 
     const handleClose = () => { 
@@ -30,12 +29,18 @@ export default function Buscador() {
     const handleShow = () => setShow(true);
 
     async function loadContactos() {
-        const response = await getContactos()
-        // console.log(response)
-        // if (response.status === 200){
-            setContactos(response.data)
-        // }
-        return response
+        try {
+            const response = await getContactos()
+            console.log(response)
+            if (response.status === 200){
+                setContactos(response.data);
+                console.log(response.data)
+            }
+            return response
+        } catch (error) {
+            console.log(error)
+        }
+
     }
 
     // async function loadContacto() {
