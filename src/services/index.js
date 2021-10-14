@@ -14,6 +14,18 @@ export async function getContactos(){
     }
 }
 
+export async function peticionGet(){
+    try {
+        const response = await Axios({
+            url: `https://agendaempresarial.azurewebsites.net/api/contactos/?search=Sara`,
+            method: 'GET'
+        })
+        return response
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 export async function saveContacto(contactoData){
     
     try {
@@ -38,13 +50,3 @@ export async function saveContacto(contactoData){
         console.log(error)
     }
 }
-
-// "Nombre": "Esteban",
-// "Apellido": "Muñoz",
-// "Compañia": 2,
-// "Cargo": "Ing software",
-// "Email": "Tatiana@Tatiana.com",
-// "Celular": "3136907810",
-// "Direccion": "Cra 7 2 -21",
-// "Ciudad": "Cali",
-// "Estado": true
