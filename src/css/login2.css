@@ -563,7 +563,7 @@ body {
 
 .redes-slider ul {
     margin-top: 0;
-    margin-bottom: 0rem
+    margin-bottom: 0rem;
 }
 
 .redes-slider li {
@@ -610,7 +610,7 @@ body {
 .redes-slider li a i {
     position: absolute;
     top: 14px;
-    left: 24px;
+    left: 17.5px;
     font-size: 15px
 }
 

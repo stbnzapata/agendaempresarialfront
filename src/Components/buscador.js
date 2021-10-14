@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../css/header.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
-import { getContactos, saveContacto, peticionGet } from '../services';
+import { getContactos, saveContacto } from '../services';
 import '../css/contactos.css';
 import Contactos from './contactos';
 
@@ -21,6 +21,7 @@ export default function Buscador() {
         Direccion:'',
         Ciudad:''
     });
+    
 
     const handleClose = () => { 
         setFormValues({});
@@ -42,22 +43,9 @@ export default function Buscador() {
         }
     }
 
-    // async function loadContacto() {
-    //     const response = await peticionGet()
-    //     console.log(response)
-    //     if (response.status === 200){
-    //         setContactos(response.data)
-    //     }
-    //     return response
-    // }
-
     useEffect(() => {    
         loadContactos();
     }, [])
-
-    // useEffect(() => {
-    //     loadContacto();
-    // }, [])
 
     const handleChange = (event) => {
         const {name, value} = event.target;        
@@ -91,7 +79,6 @@ export default function Buscador() {
                             <div className="input-group">
                                 <div className="form-outline" style={{marginLeft:35}}>
                                     <input type="search" id="form1" className="form-control" />
-                                    {/* <label className="form-label" for="form1">Buscar</label> */}
                                 </div>
                                 <button type="button" className="btn btn-primary">
                                    Buscar
@@ -111,6 +98,7 @@ export default function Buscador() {
                                         </div>
                                     </ModalHeader>
                                     <ModalBody>
+                                        
                                         <FormGroup>
                                             <Label for="nombre">Nombre</Label>
                                             <Input type="text" id="nombre" name='Nombre' value={formValues.Nombre} onChange={handleChange}/>
@@ -146,9 +134,10 @@ export default function Buscador() {
                                         
                                     </ModalBody>
                                     <ModalFooter>
-                                        <Button onClick={_handleSubmit} type="button" className="btn btn-primary" style={{width:'100px', marginRight:'20px'}}>
+                                        <Button onClick={_handleSubmit} type="button" className="btn btn-primary" style={{width:'100px'}}>
                                             Guardar
                                         </Button>
+                                        &nbsp;
                                         <Button onClick={handleClose} type="button" className="btn btn-danger" style={{width:'100px'}}>
                                             Cerrar
                                         </Button>

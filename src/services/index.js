@@ -14,18 +14,6 @@ export async function getContactos(){
     }
 }
 
-export async function peticionGet(){
-    try {
-        const response = await Axios({
-            url: `https://agendaempresarial.azurewebsites.net/api/contactos/?search=Sara`,
-            method: 'GET'
-        })
-        return response
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 export async function saveContacto(contactoData){
     
     try {
@@ -50,3 +38,5 @@ export async function saveContacto(contactoData){
         console.log(error)
     }
 }
+
+
