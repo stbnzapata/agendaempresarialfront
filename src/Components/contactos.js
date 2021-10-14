@@ -5,16 +5,29 @@ import '../css/contactos.css';
 import Buscador from './buscador'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
 
+
 const Contactos = ({contactos}) => {
 
-    const [showEditar, setShowEditar] = useState(false)
+    const [showEditar, setShowEditar] = useState(false);
+    const [formValues, setFormValues] = useState({
+        Nombre:'',
+        Apellido:'',
+        Compañia:0,
+        Cargo:'',
+        Email:'',
+        Celular:'',
+        Direccion:'',
+        Ciudad:''
+    });
 
     const handleClose = () => { 
         setShowEditar(false);
     }
 
     const handleShow = () => {
-        console.log('hola')
+        
+        
+        
         setShowEditar(true)
     };
 
@@ -45,20 +58,20 @@ const Contactos = ({contactos}) => {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style={{width:109}}>{Nombre}</td>
-                                    <td style={{width:109}}>{Apellido}</td>
-                                    <td style={{width:109}}>{Compañia}</td>
-                                    <td style={{width:109}}>{Cargo}</td>
-                                    <td style={{width:109}}>{Email}</td>
-                                    <td style={{width:100}}>{Celular}</td>
-                                    <td style={{width:109}}>{Direccion}</td>
-                                    <td style={{width:109}}>{Ciudad}</td>
-                                    <td style={{width:150, display:'flex'}}>
+                                    <td  style={{width:109}}>{Nombre}</td>
+                                    <td  style={{width:109}}>{Apellido}</td>
+                                    <td  style={{width:109}}>{Compañia}</td>
+                                    <td  style={{width:109}}>{Cargo}</td>
+                                    <td  style={{width:109}}>{Email}</td>
+                                    <td  style={{width:100}}>{Celular}</td>
+                                    <td  style={{width:109}}>{Direccion}</td>
+                                    <td  style={{width:109}}>{Ciudad}</td>
+                                    <td  style={{width:150, display:'flex'}}>
                                         <Button id='botonVentanaModalEditar' onClick={handleShow} type="button" className="btn btn-primary" style={{ width: 50 }}>
                                         <i className="fa fa-edit"></i>
                                         </Button>
                                         <form id='formulario' >
-                                            <Modal id='ventanaModalEditar' isOpen={showEditar} onHide={handleClose}>
+                                            <Modal id='ventanaModalEditar'  isOpen={showEditar} onHide={handleClose}>
                                                 <ModalHeader>
                                                     <div className="container">
                                                         <h1>Editar Contacto</h1>
@@ -68,7 +81,7 @@ const Contactos = ({contactos}) => {
                                         
                                                     <FormGroup>
                                                         <Label for="nombre">Nombre</Label>
-                                                        <Input type="text" id="nombre" name='Nombre'  />
+                                                        <Input type="text" id="nombre" name='Nombre' />
                                                     </FormGroup>
                                                     <FormGroup>
                                                         <Label for="apellido">Apellido</Label>
@@ -76,7 +89,7 @@ const Contactos = ({contactos}) => {
                                                     </FormGroup>
                                                     <FormGroup>
                                                         <Label for="compañia">Compañia</Label>
-                                                        <Input type="number" id="compañia" name='Compañia' />
+                                                        <Input type="number" id="compañia" name='Compañia'/>
                                                     </FormGroup>
                                                     <FormGroup>
                                                         <Label for="cargo">Cargo</Label>
@@ -88,20 +101,20 @@ const Contactos = ({contactos}) => {
                                                     </FormGroup>
                                                     <FormGroup>
                                                         <Label for="movil">Celular</Label>
-                                                        <Input type="number" id="movil" name='Celular'  />
+                                                        <Input type="number" id="movil" name='Celular' />
                                                     </FormGroup>                                    
                                                     <FormGroup>
                                                         <Label for="direccion">Dirección</Label>
-                                                        <Input type="text" id="direccion" name='Direccion'   />
+                                                        <Input type="text" id="direccion" name='Direccion'  />
                                                     </FormGroup>
                                                     <FormGroup>
                                                         <Label for="ciudad">Ciudad</Label>
-                                                        <Input type="text" id="ciudad" name='Ciudad'  />
+                                                        <Input type="text" id="ciudad" name='Ciudad' />
                                                     </FormGroup>                                   
                                                     
                                                 </ModalBody>
                                                 <ModalFooter>
-                                                    <Button type="button" className="btn btn-primary" style={{width:'100px'}}>
+                                                    <Button type="button" className="btn btn-primary"  style={{width:'100px'}}>
                                                         Guardar
                                                     </Button>
                                                     &nbsp;
