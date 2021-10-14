@@ -4,50 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../media/logo.png';
 import '../css/login2.css';
 import 'font-awesome/css/font-awesome.min.css';
+
+
 import { app } from '../fb'
 
-function valAcceso(forma, param) {
-
-    let base = "document." + forma + ".";
-    let partir = param.split(",");
-    let n = partir.length;
-    // let tam = n - 1;
-    let i;
-    let bError = false;
-    let valor = 1;
-    let x;
-    for (i = 0; i < n; i++) {
-        x = eval(base + partir[i] + ".value");
-        x = x.replace(/^\s+/, "");
-        bError = bError || (x === "");
-        if (bError) {
-            eval(base + partir[i] + ".value=''");
-            document.getElementById('capax_' + partir[i]).style.display = "";
-            eval(base + partir[i] + ".focus()");
-            valor = 1;
-            break;
-        } else {
-            valor = 1;
-        }
-    }
-
-    let password = document.getElementById('c').value;
-    let valido = document.getElementById('capax_c');
-    if (password) {
-        if (password.length < 8) {
-            valido.style.display = "";
-            valido.innerText = "La contraseña debe contener mas de 8 caracteres";
-            valor = 1;
-        } else {
-            valido.style.display = "none";
-        }
-    }
-    // comentado mientras se define la ruta
-    //if (valor == "") eval(base + "submit()");
-
-}
-
-function validarClave() {
+export function validarClave() {
 
     //document.getElementById('c').addEventListener('input', function () {
     let clave = document.getElementById('c').value;
@@ -76,7 +37,7 @@ function validarClave() {
 }
 
 //validar el correo electronico
-function validarEmail() {
+export function validarEmail() {
     //document.getElementById('l').addEventListener('input', function () {
 
     let campo = document.getElementById('l');
@@ -96,7 +57,7 @@ function validarEmail() {
     //});
 }
 
-function ocultar(capa) {
+export function ocultar(capa) {
     let base = document.getElementById(capa);
     if (base) base.style.display = "none";
 }
@@ -118,7 +79,11 @@ export default function Login(props) {
                 let errorCode = error.code;
                 let errorMessage = error.message;
                 console.log(errorCode, errorMessage)
-                alert('El usuario ha sido creado con anterioridad por favor verifique.')
+                let capal = document.getElementById('capax_l');
+                capal.style.display = "";
+                capal.innerText = "El usuario ha sido creado con anterioridad por favor verifique.";
+                //alert('El usuario ha sido creado con anterioridad por favor verifique.')
+              
             });
             
     }
@@ -131,7 +96,21 @@ export default function Login(props) {
             let errorCode = error.code;
             let errorMessage = error.message;
             console.log(errorCode, errorMessage)
-            alert('Usuario o Contraseña incorrecta por favor verifique.')
+            //alert('Usuario o Contraseña incorrecta por favor verifique.')
+            let email = document.getElementById('l').value;
+            let capal = document.getElementById('capax_l');
+            var password = document.getElementById('c').value;
+            let capac = document.getElementById('capax_c');
+    
+            if(!email && !password){
+                capal.style.display = "";
+                capal.innerText = "Ingrese correo y clave";
+            }else if (!email) {
+                capal.style.display = "";
+            }else if (!password) {
+                capac.style.display = "";
+            }
+            
         });
     }
 
@@ -150,13 +129,13 @@ export default function Login(props) {
 
     return (
         <div>
-
+            
             <nav className="redes-slider">
                 <ul>
-                    <li><a href="https://www.facebook.com/" target="_black"><i className="fas fa-facebook-f"></i><span>Facebook</span></a></li>
-                    <li><a href="https://twitter.com/?lang=es" target="_black"><i className="fas fa-twitter"></i><span>Twitter</span></a></li>
-                    <li><a href="https://www.instagram.com/" target="_black"><i className="fas fa-instagram"></i><span>Instagram</span></a></li>
-                    <li><a href="https://www.youtube.com/" target="_black"><i className="fas fa-youtube"></i><span>Youtube</span></a></li>
+                    <li><a href="https://www.facebook.com/" target="_black"><i className="fa fa-facebook-f"></i><span>Facebook</span></a></li>
+                    <li><a href="https://twitter.com/?lang=es" target="_black"><i className="fa fa-twitter"></i><span>Twitter</span></a></li>
+                    <li><a href="https://www.instagram.com/" target="_black"><i className="fa fa-instagram"></i><span>Instagram</span></a></li>
+                    <li><a href="https://www.youtube.com/" target="_black"><i className="fa fa-youtube"></i><span>Youtube</span></a></li>
                 </ul>
             </nav>
 
@@ -207,9 +186,9 @@ export default function Login(props) {
 
                                 <div className="footer" valign="bottom">
                                     <input type="submit" name="botonera" value={isRegistrando ? "REGISTRARSE" : "INGRESAR"} className="btn btn-dark"
-                                        onClick={() => {
-                                            valAcceso('forml', 'l,c')
-                                        }}
+                                        // onClick={() => {
+                                        //     valAcceso('forml', 'l,c')
+                                        // }}
                                     />
                                 </div>
 

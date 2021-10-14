@@ -1,7 +1,10 @@
 img, svg .logo {
     vertical-align: middle;
-    width: 46%;
+    width: 30%;
 }
+
+
+
 
 .header {
 
@@ -23,7 +26,19 @@ img, svg .logo {
 .header .mensaje{
 
     display: inline-block;
+    margin: 5%;
+    font-size: 1.5px;
+    color: #125570;
     
+}
+.header .mensaje p{
+    font-size: 25px;
+    font-weight: 400;
+    font-family: serif;
+}
+
+.header form  {
+    margin-left: 63%;
 }
 
 
@@ -79,6 +94,7 @@ img, svg .logo {
     background-color: #607eab;
     border-color: #607eab;
 }
+
 
 
 
