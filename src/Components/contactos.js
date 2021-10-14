@@ -6,7 +6,7 @@ import Buscador from './buscador'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
 
 
-const Contactos = ({contactos}) => {
+const Contactos = ({ contactos }) => {
 
     const [showEditar, setShowEditar] = useState(false);
     const [formValues, setFormValues] = useState({
@@ -33,11 +33,11 @@ const Contactos = ({contactos}) => {
 
     if(Buscador.length === []){
         return (
-        <div style={{textAlign:'center', marginTop: 100 }}>
-            <h2>No hay contactos registrados</h2>
-        </div>
+            <div style={{ textAlign: 'center', marginTop: 100 }}>
+                <h2>No hay contactos registrados</h2>
+            </div>
         )
-     }else{
+    } else {
         return (
             contactos.map(({ id, Nombre, Apellido, Compañia, Cargo, Email, Celular, Direccion, Ciudad }) => (
                 <div className='mt-3' key={id}>

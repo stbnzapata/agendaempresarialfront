@@ -5,12 +5,13 @@ import Header from './header';
 import Buscador from './buscador';
 
 
+
 export default function PaginaInicio() {
 
     return (
         <div>
            <Header/>
-           <Buscador/>    
+           <Buscador/>  
            <Footer/>
         </div>
     );

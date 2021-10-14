@@ -76,18 +76,21 @@ export default function Buscador() {
                 <div className="row">
                     <div className="buscador-e">
                         <div className="buscador col-2">
-                            <div className="input-group">
+                            <form className="input-group">
                                 <div className="form-outline" style={{marginLeft:35}}>
+
+                                    <input type="search" id="idbuscador" className="form-control" placeholder="Buscar" />
+                                
+
                                     <input type="search" id="form1" className="form-control" />
+
                                 </div>
-                                <button type="button" className="btn btn-primary">
-                                   Buscar
-                                </button>
-                            </div>
+                
+                            </form>
                         </div>
                         
                         <div className="ingresar">
-                            <Button id='botonVentanaModal' onClick={handleShow} type="button" className="btn btn-primary">
+                            <Button id='botonVentanaModal' onClick={handleShow} type="button" className="btn btn-primary" style={{color:125570}}>
                                Ingresar
                             </Button>
                             <form id='formulario' onSubmit={_handleSubmit} handleSubmit={handleSubmit}>

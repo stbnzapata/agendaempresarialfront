@@ -2,8 +2,15 @@
   "name": "agendaempresarialfront",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://agendaempresarial.azurewebsites.net",
+<<<<<<< HEAD
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.15",
+=======
+    "dependencies": {
+>>>>>>> 37a3f3698ec83e9cca4e0709ecda38725f6b7b09
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
@@ -13,6 +20,7 @@
     "firebase": "^9.1.1",
     "firebase-tools": "^9.19.0",
     "font-awesome": "^4.7.0",
+    "glyphicons": "^0.2.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.4",
     "react-dom": "^17.0.2",

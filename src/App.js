@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Login from './Components/login';
 import PaginaInicio from './Components/pagina_inicio';
 import {app} from './fb';
+
 // import { BrowserRouter as Router, Switch, Route, link } from 'react-router-dom';
 
 function App() {
