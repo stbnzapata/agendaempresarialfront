@@ -25,9 +25,6 @@ const Contactos = ({contactos}) => {
     }
 
     const handleShow = () => {
-        
-        
-        
         setShowEditar(true)
     };
 
