@@ -64,10 +64,21 @@ export function ocultar(capa) {
 export default function Login(props) {
     
     const [isRegistrando, setIsRegistrando] = React.useState(false);
+    const [hide, setNoHide] = React.useState(false);
 
+    const mostrarInput = () => {
+        setNoHide = true;
+    }
+
+    //Creación de nuevo usuario y validación de contraseñas
     const crearUsuario = (correo, contraseña) =>{
-       
-        app
+       let clave = document.getElementById('c').value;
+       let clave2 = document.getElementById('vc').value;
+
+        if (clave !== clave2) {
+            alert("Error! Las contraseñas deben coincidir")
+        } else {
+            app
             .auth()
             .createUserWithEmailAndPassword(correo, contraseña)
             .then((usuarioFirebase) => {
@@ -82,8 +93,19 @@ export default function Login(props) {
                 capal.style.display = "";
                 capal.innerText = "El usuario ha sido creado con anterioridad por favor verifique.";
                 //alert('El usuario ha sido creado con anterioridad por favor verifique.')
-              
+                
+                //Alerta para que no nos dejen campos vacíos
+                let email = document.getElementById('l').value;
+                let clave = document.getElementById('c').value;
+                let clave2 = document.getElementById('vc').value;
+                
+                if(!email || !clave || !clave2){
+                    alert("Los campos no pueden quedar vacíos");
+                    return false;
+                }
+                  
             });
+        }
             
     }
 
@@ -100,6 +122,7 @@ export default function Login(props) {
             let capal = document.getElementById('capax_l');
             var password = document.getElementById('c').value;
             let capac = document.getElementById('capax_c');
+
     
             if(!email && !password){
                 capal.style.display = "";
@@ -153,7 +176,7 @@ export default function Login(props) {
                                 <h6 className="mb-2">{isRegistrando ? "REGISTRO" : "INICIO DE SESION"}</h6>
 
                                 <div className="content">
-                                    <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *"
+                                    <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *" 
                                         onChange={() => {
                                             validarEmail();
                                         }}
@@ -165,7 +188,7 @@ export default function Login(props) {
                                     <div className="user-icon"></div>
 
                                     <input name="c" id="c" type="password" className="input password form-control"
-                                        placeholder="Clave *"
+                                        placeholder="Clave *" 
                                         onChange={() => {
                                             validarClave();
                                         }}
@@ -173,8 +196,23 @@ export default function Login(props) {
                                             ocultar('capax_c');
                                             ocultar('capax_error');
                                         }} />
+                                        
+                                    <div className="pass-icon"></div>
+
+                                    <input name="vc" id="vc" type="password" className="input password form-control"
+                                        placeholder="Confirmar Clave *" 
+                                        onChange={() => {
+                                            validarClave();
+                                            mostrarInput();
+                                        }}
+                                        onBlur={() => {
+                                            ocultar('capax_vc');
+                                            ocultar('capax_error');
+                                        }} />
 
                                     <div className="pass-icon"></div>
+
+                                    
 
                                 </div>
 
@@ -194,7 +232,7 @@ export default function Login(props) {
                             </form>
 
                             <div className="footer" valign="bottom">
-                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"} className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)}
+                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"} className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)} onChange={() => setNoHide(!hide)}
                                 />
                             </div>
 

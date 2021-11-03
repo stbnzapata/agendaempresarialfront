@@ -65,7 +65,7 @@ export default function Buscador() {
             setShow(false);
             alert('Los datos del contacto se han guardado satisfactoriamente.')
         } catch (error) {
-            alert('Ha ocurrido un error gusrdando los datos del contacto.')
+            alert('Ha ocurrido un error guardando los datos del contacto.')
         }
                 
     }
