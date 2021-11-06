@@ -4,13 +4,11 @@ img, svg .logo {
 }
 
 .header {
-
     /* width: 100%; */
     text-align: center;
     margin: 0 auto;
     display: block;
     background: #faf8f8;
-
 }
 
 .header a.logo{
@@ -21,49 +19,38 @@ img, svg .logo {
 
 
 .header .mensaje{
-
-    display: inline-block;
-    
+    display: inline-block;    
 }
 
 
-.header .navbar {
-    
-    display: inline-block;
-    
+.header .navbar {    
+    display: inline-block;    
 }
 
-.header nav ul li a {
-    
+.header nav ul li a {    
     padding: .5rem 1rem !important;
-    display: block;
-    
+    display: block;    
 }
 
-.header nav ul li button {
-    
+.header nav ul li button {    
     margin: 0 0 0 20.5rem;
     width: 37% !important;
 }
 
-.bus-btn .row {
-    
+.bus-btn .row {    
     padding: 3rem 0rem 0rem;
 }
 
-.bus-btn .buscador {
-    
+.bus-btn .buscador {    
     display: inline-block;
     width: 90%;
 }
 
-.bus-btn .buscador .form-outline {
-    
+.bus-btn .buscador .form-outline {    
     width: 44%;
 }
 
-.bus-btn .ingresar {
-    
+.bus-btn .ingresar {    
     display: inline-block;
 
 }

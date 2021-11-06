@@ -62,7 +62,7 @@ export function ocultar(capa) {
 
 
 export default function Login(props) {
-    
+
     const [isRegistrando, setIsRegistrando] = React.useState(false);
    
     //Creación de nuevo usuario y validación de contraseñas
@@ -104,11 +104,11 @@ export default function Login(props) {
             
     }
 
-    const iniciarSesion = (correo, contraseña) =>{
-        app.auth().signInWithEmailAndPassword(correo, contraseña).then((usuarioFirebase)=>{
+    const iniciarSesion = (correo, contraseña) => {
+        app.auth().signInWithEmailAndPassword(correo, contraseña).then((usuarioFirebase) => {
             console.log('Sesion Iniciada con: ', usuarioFirebase.user);
-            props.setUsuario(usuarioFirebase);           
-        }).catch((error)=>{
+            props.setUsuario(usuarioFirebase);
+        }).catch((error) => {
             let errorCode = error.code;
             let errorMessage = error.message;
             console.log(errorCode, errorMessage)
@@ -117,16 +117,16 @@ export default function Login(props) {
             let capal = document.getElementById('capax_l');
             var password = document.getElementById('c').value;
             let capac = document.getElementById('capax_c');
-    
-            if(!email && !password){
+
+            if (!email && !password) {
                 capal.style.display = "";
                 capal.innerText = "Ingrese correo y clave";
-            }else if (!email) {
+            } else if (!email) {
                 capal.style.display = "";
-            }else if (!password) {
+            } else if (!password) {
                 capac.style.display = "";
             }
-            
+
         });
     }
 
@@ -135,21 +135,21 @@ export default function Login(props) {
         const correo = e.target.l.value;
         const contraseña = e.target.c.value;
         console.log(correo, contraseña);
-        if (isRegistrando){
+        if (isRegistrando) {
             crearUsuario(correo, contraseña);
         }
-        if(!isRegistrando){
+        if (!isRegistrando) {
             iniciarSesion(correo, contraseña);
         }
     };
 
     return (
         <div>
-            
-            <nav className="redes-slider" style={{width:55}}>
-                <ul style={{marginLeft:5, paddingLeft:5, width:55}}>
+
+            <nav className="redes-slider" style={{ width: 55 }}>
+                <ul style={{ marginLeft: 5, paddingLeft: 5, width: 55 }}>
                     <li><a href="https://www.facebook.com/" target="_black"><i className="fa fa-facebook-f"></i><span>Facebook</span></a></li>
-                    <li ><a href="https://twitter.com/?lang=es" target="_black"><i className="fa fa-twitter"></i><span>Twitter</span></a></li>
+                    <li ><a href="https://www.twitter.com/" target="_black"><i className="fa fa-twitter"></i><span>Twitter</span></a></li>
                     <li ><a href="https://www.instagram.com/" target="_black"><i className="fa fa-instagram"></i><span>Instagram</span></a></li>
                     <li ><a href="https://www.youtube.com/" target="_black"><i className="fa fa-youtube"></i><span>Youtube</span></a></li>
                 </ul>
@@ -242,16 +242,16 @@ export default function Login(props) {
 
                                 <div className="footer" valign="bottom">
                                     <input type="submit" name="botonera" value={isRegistrando ? "REGISTRARSE" : "INGRESAR"} className="btn btn-dark"
-                                        // onClick={() => {
-                                        //     valAcceso('forml', 'l,c')
-                                        // }}
+                                    // onClick={() => {
+                                    //     valAcceso('forml', 'l,c')
+                                    // }}
                                     />
                                 </div>
 
                             </form>
 
                             <div className="footer" valign="bottom">
-                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"} className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)}
+                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"} className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)} 
                                 />
                             </div>
 

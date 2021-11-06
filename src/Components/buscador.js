@@ -22,7 +22,6 @@ export default function Buscador() {
         Ciudad:''
     });
     
-
     const handleClose = () => { 
         setFormValues({});
         setShow(false);
@@ -81,14 +80,14 @@ export default function Buscador() {
                                     <input type="search" id="form1" className="form-control" />
                                 </div>
                                 <button type="button" className="btn btn-primary">
-                                   Buscar
+                                    Buscar
                                 </button>
                             </div>
                         </div>
                         
                         <div className="ingresar">
                             <Button id='botonVentanaModal' onClick={handleShow} type="button" className="btn btn-primary">
-                               Ingresar
+                                Ingresar
                             </Button>
                             <form id='formulario' onSubmit={_handleSubmit} handleSubmit={handleSubmit}>
                                 <Modal id='ventanaModal' isOpen={show} onHide={handleClose}>

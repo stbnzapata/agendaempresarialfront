@@ -14,6 +14,7 @@ export default function Header() {
         <div className="container mt-3" style={{marginLeft:175}}>
             <div className="container-fluid">
                 <div className="row header">
+
                     <div className="navbar-brand logo col-2">
                         <img src={logo} alt="Logo"/>
                     </div>
@@ -35,6 +36,7 @@ export default function Header() {
 
                         </ul>
                     </nav>
+
                 </div>
             </div>
         </div>
