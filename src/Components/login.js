@@ -6,6 +6,21 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import { app } from '../fb'
 
+export function valAcceso(forma, param) {
+
+    let password = document.getElementById('c').value;
+    let valido = document.getElementById('capax_c');
+    if (password) {
+        if (password.length < 8) {
+            valido.style.display = "";
+            valido.innerText = "La contraseña debe contener mas de 8 caracteres";
+
+        } else {
+            valido.style.display = "none";
+        }
+    }
+}
+
 export function validarClave() {
 
     //document.getElementById('c').addEventListener('input', function () {
@@ -185,9 +200,9 @@ export default function Login(props) {
 
                                 <div className="footer" valign="bottom">
                                     <input type="submit" name="botonera" value={isRegistrando ? "REGISTRARSE" : "INGRESAR"} className="btn btn-dark"
-                                        // onClick={() => {
-                                        //     valAcceso('forml', 'l,c')
-                                        // }}
+                                        onClick={() => {
+                                            valAcceso('forml', 'l,c')
+                                        }}
                                     />
                                 </div>
 
