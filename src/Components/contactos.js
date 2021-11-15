@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../css/contactos.css';
-import Buscador from './buscador'
+import Buscador from './buscador';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
 
 const Contactos = ({ contactos }) => {
@@ -19,10 +19,9 @@ const Contactos = ({ contactos }) => {
         Ciudad: ''
     });
 
-    const seleccionarContacto = () => {
-        let datos = contactos.length - 1
-        console.log(contactos[datos].id)
-        setFormValues(contactos[datos])
+    const seleccionarContacto = (elemento) => {  
+        setFormValues(elemento);
+        setShowEditar(true);  
     }
 
     const handleChange = (event) => {
@@ -35,11 +34,6 @@ const Contactos = ({ contactos }) => {
         setShowEditar(false);
     }
 
-    const handleShow = () => {
-        setShowEditar(true)
-        seleccionarContacto()
-    };
-
     if (Buscador.length === []) {
         return (
             <div style={{ textAlign: 'center', marginTop: 100 }}>
@@ -48,8 +42,8 @@ const Contactos = ({ contactos }) => {
         )
     } else {
         return (
-            contactos.map(({ id, Nombre, Apellido, Compañia, Cargo, Email, Celular, Direccion, Ciudad }) => (
-                <div className='mt-3' key={id}>
+            contactos.map(elemento => (
+                <div className='mt-3' key={elemento.id}>
                     <div className="container">
                         <table className="table table-bordered" border="0">
                             <thead>
@@ -67,16 +61,16 @@ const Contactos = ({ contactos }) => {
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style={{ width: 109 }}>{Nombre}</td>
-                                    <td style={{ width: 109 }}>{Apellido}</td>
-                                    <td style={{ width: 109 }}>{Compañia}</td>
-                                    <td style={{ width: 109 }}>{Cargo}</td>
-                                    <td style={{ width: 109 }}>{Email}</td>
-                                    <td style={{ width: 100 }}>{Celular}</td>
-                                    <td style={{ width: 109 }}>{Direccion}</td>
-                                    <td style={{ width: 109 }}>{Ciudad}</td>
+                                    <td style={{ width: 109 }}>{elemento.Nombre}</td>
+                                    <td style={{ width: 109 }}>{elemento.Apellido}</td>
+                                    <td style={{ width: 109 }}>{elemento.Compañia}</td>
+                                    <td style={{ width: 109 }}>{elemento.Cargo}</td>
+                                    <td style={{ width: 109 }}>{elemento.Email}</td>
+                                    <td style={{ width: 100 }}>{elemento.Celular}</td>
+                                    <td style={{ width: 109 }}>{elemento.Direccion}</td>
+                                    <td style={{ width: 109 }}>{elemento.Ciudad}</td>
                                     <td style={{ width: 150, display: 'flex' }}>
-                                        <Button id='botonVentanaModalEditar' onClick={handleShow} type="button" className="btn btn-primary" style={{ width: 50 }}>
+                                        <Button  value={elemento.id} id='botonVentanaModalEditar' onClick={()=>seleccionarContacto(elemento)} type="button" className="btn btn-primary" style={{ width: 50 }}>
                                             <i className="fa fa-edit"></i>
                                         </Button>
                                         <form id='formulario' >

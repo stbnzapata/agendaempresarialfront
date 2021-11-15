@@ -30,15 +30,15 @@ export default function Buscador() {
 
     async function loadContactos() {
         try {
-            const response = await getContactos()
+            const response = await getContactos();
             console.log(response)
             if (response.status === 200){
                 setContactos(response.data);
-                console.log(response.data)
+                console.log(response.data);
             }
             return response
         } catch (error) {
-            console.log(error)
+            console.log(error);
         }
     }
 
@@ -53,20 +53,19 @@ export default function Buscador() {
 
     const _handleSubmit = (event) =>{
         event.preventDefault();
-        handleSubmit({...formValues})        
+        handleSubmit({...formValues});        
     }
 
     const handleSubmit = async (data) =>{
-        try {            
+        try {                        
             await saveContacto(data);
             loadContactos();
             setFormValues({});
             setShow(false);
-            alert('Los datos del contacto se han guardado satisfactoriamente.')
+            alert('Los datos del contacto se han guardado satisfactoriamente.');            
         } catch (error) {
-            alert('Ha ocurrido un error guardando los datos del contacto.')
-        }
-                
+            alert('Ha ocurrido un error guardando los datos del contacto.');
+        }                
     }
 
     return (
