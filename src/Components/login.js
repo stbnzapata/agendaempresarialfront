@@ -3,8 +3,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../media/logo.png';
 import '../css/login2.css';
 import 'font-awesome/css/font-awesome.min.css';
-
 import { app } from '../fb'
+import { getAuth, setPersistence, signInWithEmailAndPassword, browserSessionPersistence } from "firebase/auth";
+
+const auth = getAuth();
 
 export function validarClave() {
 
@@ -60,11 +62,10 @@ export function ocultar(capa) {
     if (base) base.style.display = "none";
 }
 
-
 export default function Login(props) {
 
     const [isRegistrando, setIsRegistrando] = React.useState(false);
-   
+    
     //Creación de nuevo usuario y validación de contraseñas
     const crearUsuario = (correo, contraseña) =>{
         let clave = document.getElementById('c').value;
@@ -141,6 +142,17 @@ export default function Login(props) {
         if (!isRegistrando) {
             iniciarSesion(correo, contraseña);
         }
+
+        setPersistence(auth, browserSessionPersistence)
+            .then(() => {
+                return signInWithEmailAndPassword(auth, correo, contraseña);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(errorCode)
+                console.log(errorMessage)
+            });
     };
 
     return (
@@ -155,11 +167,11 @@ export default function Login(props) {
                 </ul>
             </nav>
 
-            <section id="cont_admin">
+            <section id="cont_admin"  >
 
                 <section className="container">
                     <div className="row justify-content-around">
-                        <div id="wrapper" className="col-lg-4 col-md-12">
+                        <div id="wrapper" className="col-lg-4 col-md-12" style={{marginBottom:75}}>
 
                             <form action="" method="post" name="forml" id="forml" className="login-form" onSubmit={submitHandler}>
 
@@ -169,9 +181,47 @@ export default function Login(props) {
 
                                 <h6 className="mb-2">{isRegistrando ? "REGISTRO" : "INICIO DE SESION"}</h6>
 
-                                <div className="content">{isRegistrando ? <div>  
+                                <div className="content">{isRegistrando ? 
                                 
-                                <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *" 
+                                    <div>  
+                                
+                                        <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *" 
+                                            onChange={() => {
+                                                validarEmail();
+                                            }}
+                                            onBlur={() => {
+                                                ocultar('capax_l');
+                                                ocultar('capax_error');
+                                            }} />
+
+                                        <div className="user-icon"></div>
+
+                                        <input name="c" id="c" type="password" className="input password form-control"
+                                            placeholder="Clave *" 
+                                            onChange={() => {
+                                                validarClave();
+                                            }}
+                                            onBlur={() => {
+                                                ocultar('capax_c');
+                                                ocultar('capax_error');
+                                            }} />
+                                            
+                                        <div className="pass-icon"></div>
+
+                                        <input name="vc" id="vc" type="password" className="input password form-control"
+                                            placeholder="Confirmar Clave *" 
+                                            onChange={() => {
+                                                validarClave();                                            
+                                            }}
+                                            onBlur={() => {
+                                                ocultar('capax_vc');
+                                                ocultar('capax_error');
+                                            }} />
+
+                                        <div className="pass-icon"></div> 
+                                        </div> 
+                                        : 
+                                        <div> <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *" 
                                         onChange={() => {
                                             validarEmail();
                                         }}
@@ -180,9 +230,9 @@ export default function Login(props) {
                                             ocultar('capax_error');
                                         }} />
 
-                                    <div className="user-icon"></div>
+                                        <div className="user-icon"></div>
 
-                                    <input name="c" id="c" type="password" className="input password form-control"
+                                        <input name="c" id="c" type="password" className="input password form-control"
                                         placeholder="Clave *" 
                                         onChange={() => {
                                             validarClave();
@@ -192,46 +242,9 @@ export default function Login(props) {
                                             ocultar('capax_error');
                                         }} />
                                         
-                                    <div className="pass-icon"></div>
+                                        <div className="pass-icon"></div>
 
-                                    <input name="vc" id="vc" type="password" className="input password form-control"
-                                        placeholder="Confirmar Clave *" 
-                                        onChange={() => {
-                                            validarClave();                                            
-                                        }}
-                                        onBlur={() => {
-                                            ocultar('capax_vc');
-                                            ocultar('capax_error');
-                                        }} />
-
-                                    <div className="pass-icon"></div> 
-                                    </div> 
-                                    : 
-                                    <div> <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *" 
-                                    onChange={() => {
-                                        validarEmail();
-                                    }}
-                                    onBlur={() => {
-                                        ocultar('capax_l');
-                                        ocultar('capax_error');
-                                    }} />
-
-                                <div className="user-icon"></div>
-
-                                <input name="c" id="c" type="password" className="input password form-control"
-                                    placeholder="Clave *" 
-                                    onChange={() => {
-                                        validarClave();
-                                    }}
-                                    onBlur={() => {
-                                        ocultar('capax_c');
-                                        ocultar('capax_error');
-                                    }} />
-                                    
-                                <div className="pass-icon"></div>
-
-
-                                </div> }
+                                    </div> }
                                     
                                 </div>
 
@@ -250,8 +263,8 @@ export default function Login(props) {
 
                             </form>
 
-                            <div className="footer" valign="bottom">
-                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"} className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)} 
+                            <div   className="footer" valign="bottom">
+                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?" } className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)} 
                                 />
                             </div>
 
@@ -259,9 +272,9 @@ export default function Login(props) {
 
                     </div>
 
-                    {/* <div className="row">
-                        <div className="info_contacto col-12">
-                            <div className="txt">
+                    {/* <div className="row" >
+                        <div className="info_contacto col-12" >
+                            <div className="txt" >
                                 <p className="mb-0">Tel&eacute;fono: (574) 000 00 00 | Direcci&oacute;n: Cra 0 Numero 100 Bloque0|
                                     Colombia</p>
                             </div>

@@ -74,11 +74,11 @@ const Contactos = ({ contactos }) => {
                                             <i className="fa fa-edit"></i>
                                         </Button>
                                         <form id='formulario' >
-                                            <Modal id='ventanaModalEditar' isOpen={showEditar} onHide={handleClose}>
+                                            <Modal id='ventanaModalEditar' isOpen={showEditar} onHide={handleClose} style={{marginBottom:0}}>
                                                 
                                                 <ModalHeader>
-                                                    <div className="container">
-                                                        <h1>Editar Contacto</h1>
+                                                    <div className="container" >
+                                                        <h1 >Editar Contacto</h1>
                                                     </div>
                                                 </ModalHeader>
 
@@ -88,30 +88,37 @@ const Contactos = ({ contactos }) => {
                                                         <Label for="nombre">Nombre</Label>
                                                         <Input type="text" id="nombre" name='Nombre' value={formValues && formValues.Nombre} onChange={handleChange} />
                                                     </FormGroup>
+
                                                     <FormGroup>
                                                         <Label for="apellido">Apellido</Label>
                                                         <Input type="text" id="apellido" name='Apellido' value={formValues && formValues.Apellido} onChange={handleChange} />
                                                     </FormGroup>
+
                                                     <FormGroup>
                                                         <Label for="compañia">Compañia</Label>
                                                         <Input type="number" id="compañia" name='Compañia' value={formValues && formValues.Compañia} onChange={handleChange} />
                                                     </FormGroup>
+
                                                     <FormGroup>
                                                         <Label for="cargo">Cargo</Label>
                                                         <Input type="text" id="cargo" name='Cargo' value={formValues && formValues.Cargo} onChange={handleChange} />
                                                     </FormGroup>
+
                                                     <FormGroup>
                                                         <Label for="email">Email</Label>
                                                         <Input type="email" id="email" name='Email' value={formValues && formValues.Email} onChange={handleChange} />
                                                     </FormGroup>
+
                                                     <FormGroup>
                                                         <Label for="movil">Celular</Label>
                                                         <Input type="number" id="movil" name='Celular' value={formValues && formValues.Celular} onChange={handleChange} />
                                                     </FormGroup>
+
                                                     <FormGroup>
                                                         <Label for="direccion">Dirección</Label>
                                                         <Input type="text" id="direccion" name='Direccion' value={formValues && formValues.Direccion} onChange={handleChange} />
                                                     </FormGroup>
+                                                    
                                                     <FormGroup>
                                                         <Label for="ciudad">Ciudad</Label>
                                                         <Input type="text" id="ciudad" name='Ciudad' value={formValues && formValues.Ciudad} onChange={handleChange} />
