@@ -34,9 +34,27 @@ export async function saveContacto(contactoData){
             data: formData,
         })
         return response
+        
     } catch (error) {
         console.log(error)
     }
 }
 
+export async function getSearch(parameter){
+
+
+    try {
+        let ruta = baseUrl+ "?search=" + parameter;
+        
+        const response = await Axios({
+            url: `${ruta}`,
+            method: 'GET',
+            
+        })
+        return response
+
+    } catch (error) {
+        console.log(error)
+    }
+}
 

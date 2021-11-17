@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/footer.css';
 
 export default function Footer() {
-
     return (
         <div className="cont_remate">
             <footer>
@@ -13,6 +12,5 @@ export default function Footer() {
                 </div>
             </footer>
         </div>
-
     );
 }

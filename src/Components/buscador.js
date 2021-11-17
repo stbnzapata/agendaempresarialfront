@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../css/header.css';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
-import { getContactos, saveContacto } from '../services';
+import { getContactos, saveContacto, getSearch } from '../services';
 import '../css/contactos.css';
 import Contactos from './contactos';
 
@@ -22,7 +22,6 @@ export default function Buscador() {
         Ciudad:''
     });
     
-
     const handleClose = () => { 
         setFormValues({});
         setShow(false);
@@ -65,9 +64,37 @@ export default function Buscador() {
             setShow(false);
             alert('Los datos del contacto se han guardado satisfactoriamente.')
         } catch (error) {
-            alert('Ha ocurrido un error gusrdando los datos del contacto.')
+            alert('Ha ocurrido un error guardando los datos del contacto.')
         }
                 
+    }
+
+    const search_handleSubmit = (event) =>{
+        event.preventDefault();
+        let parameter = document.getElementById('form1search').value;
+        searchContactos(parameter)  
+          
+    }
+
+    async function searchContactos(parameter) {
+
+     
+        try {
+        
+            const response = await getSearch(parameter)
+
+            if (response.status === 200){
+                
+                setContactos(response.data);
+                console.log(response.data)
+    
+               
+            }
+            return response
+            
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
@@ -78,17 +105,17 @@ export default function Buscador() {
                         <div className="buscador col-2">
                             <div className="input-group">
                                 <div className="form-outline" style={{marginLeft:35}}>
-                                    <input type="search" id="form1" className="form-control" />
+                                    <input type="search" id="form1search" className="form-control" />
                                 </div>
-                                <button type="button" className="btn btn-primary">
-                                   Buscar
+                                <button onClick={search_handleSubmit} type="button" className="btn btn-primary">
+                                    Buscar
                                 </button>
                             </div>
                         </div>
                         
                         <div className="ingresar">
                             <Button id='botonVentanaModal' onClick={handleShow} type="button" className="btn btn-primary">
-                               Ingresar
+                                Ingresar
                             </Button>
                             <form id='formulario' onSubmit={_handleSubmit} handleSubmit={handleSubmit}>
                                 <Modal id='ventanaModal' isOpen={show} onHide={handleClose}>

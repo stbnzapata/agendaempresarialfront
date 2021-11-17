@@ -77,12 +77,18 @@ export function ocultar(capa) {
 
 
 export default function Login(props) {
-    
-    const [isRegistrando, setIsRegistrando] = React.useState(false);
 
+    const [isRegistrando, setIsRegistrando] = React.useState(false);
+   
+    //Creación de nuevo usuario y validación de contraseñas
     const crearUsuario = (correo, contraseña) =>{
-       
-        app
+        let clave = document.getElementById('c').value;
+        let clave2 = document.getElementById('vc').value;
+
+        if (clave !== clave2) {
+            alert("Error! Las contraseñas deben coincidir")
+        } else {
+            app
             .auth()
             .createUserWithEmailAndPassword(correo, contraseña)
             .then((usuarioFirebase) => {
@@ -90,41 +96,52 @@ export default function Login(props) {
                 props.setUsuario(usuarioFirebase);  
                 alert('Su usuario ha sido creado satisfactoriamente, apartir de este momento puede ingresar a la aplicacion.')  
             }).catch((error)=>{
-                let errorCode = error.code;
-                let errorMessage = error.message;
-                console.log(errorCode, errorMessage)
-                let capal = document.getElementById('capax_l');
-                capal.style.display = "";
-                capal.innerText = "El usuario ha sido creado con anterioridad por favor verifique.";
+                
                 //alert('El usuario ha sido creado con anterioridad por favor verifique.')
-              
+                
+                //Alerta para que no nos dejen campos vacíos
+                let email = document.getElementById('l').value;
+                let clave = document.getElementById('c').value;
+                let clave2 = document.getElementById('vc').value;
+                
+                if(!email || !clave || !clave2){
+                    alert("Los campos no pueden quedar vacíos");
+                }else{
+                    let errorCode = error.code;
+                    let errorMessage = error.message;
+                    console.log(errorCode, errorMessage)
+                    let capal = document.getElementById('capax_l');
+                    capal.style.display = "";
+                    capal.innerText = "El usuario ha sido creado con anterioridad por favor verifique.";
+                }
             });
+        }
             
     }
 
-    const iniciarSesion = (correo, contraseña) =>{
-        app.auth().signInWithEmailAndPassword(correo, contraseña).then((usuarioFirebase)=>{
+    const iniciarSesion = (correo, contraseña) => {
+        app.auth().signInWithEmailAndPassword(correo, contraseña).then((usuarioFirebase) => {
             console.log('Sesion Iniciada con: ', usuarioFirebase.user);
-            props.setUsuario(usuarioFirebase);           
-        }).catch((error)=>{
+            props.setUsuario(usuarioFirebase);
+        }).catch((error) => {
             let errorCode = error.code;
             let errorMessage = error.message;
             console.log(errorCode, errorMessage)
-            //alert('Usuario o Contraseña incorrecta por favor verifique.')
+            alert('Usuario o Contraseña incorrecta por favor verifique.')
             let email = document.getElementById('l').value;
             let capal = document.getElementById('capax_l');
             var password = document.getElementById('c').value;
             let capac = document.getElementById('capax_c');
-    
-            if(!email && !password){
+
+            if (!email && !password) {
                 capal.style.display = "";
                 capal.innerText = "Ingrese correo y clave";
-            }else if (!email) {
+            } else if (!email) {
                 capal.style.display = "";
-            }else if (!password) {
+            } else if (!password) {
                 capac.style.display = "";
             }
-            
+
         });
     }
 
@@ -133,21 +150,21 @@ export default function Login(props) {
         const correo = e.target.l.value;
         const contraseña = e.target.c.value;
         console.log(correo, contraseña);
-        if (isRegistrando){
+        if (isRegistrando) {
             crearUsuario(correo, contraseña);
         }
-        if(!isRegistrando){
+        if (!isRegistrando) {
             iniciarSesion(correo, contraseña);
         }
     };
 
     return (
         <div>
-            
-            <nav className="redes-slider" style={{width:55}}>
-                <ul style={{marginLeft:5, paddingLeft:5, width:55}}>
+
+            <nav className="redes-slider" style={{ width: 55 }}>
+                <ul style={{ marginLeft: 5, paddingLeft: 5, width: 55 }}>
                     <li><a href="https://www.facebook.com/" target="_black"><i className="fa fa-facebook-f"></i><span>Facebook</span></a></li>
-                    <li ><a href="https://twitter.com/?lang=es" target="_black"><i className="fa fa-twitter"></i><span>Twitter</span></a></li>
+                    <li ><a href="https://www.twitter.com/" target="_black"><i className="fa fa-twitter"></i><span>Twitter</span></a></li>
                     <li ><a href="https://www.instagram.com/" target="_black"><i className="fa fa-instagram"></i><span>Instagram</span></a></li>
                     <li ><a href="https://www.youtube.com/" target="_black"><i className="fa fa-youtube"></i><span>Youtube</span></a></li>
                 </ul>
@@ -167,8 +184,9 @@ export default function Login(props) {
 
                                 <h6 className="mb-2">{isRegistrando ? "REGISTRO" : "INICIO DE SESION"}</h6>
 
-                                <div className="content">
-                                    <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *"
+                                <div className="content">{isRegistrando ? <div>  
+                                
+                                <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *" 
                                         onChange={() => {
                                             validarEmail();
                                         }}
@@ -180,7 +198,7 @@ export default function Login(props) {
                                     <div className="user-icon"></div>
 
                                     <input name="c" id="c" type="password" className="input password form-control"
-                                        placeholder="Clave *"
+                                        placeholder="Clave *" 
                                         onChange={() => {
                                             validarClave();
                                         }}
@@ -188,9 +206,48 @@ export default function Login(props) {
                                             ocultar('capax_c');
                                             ocultar('capax_error');
                                         }} />
-
+                                        
                                     <div className="pass-icon"></div>
 
+                                    <input name="vc" id="vc" type="password" className="input password form-control"
+                                        placeholder="Confirmar Clave *" 
+                                        onChange={() => {
+                                            validarClave();                                            
+                                        }}
+                                        onBlur={() => {
+                                            ocultar('capax_vc');
+                                            ocultar('capax_error');
+                                        }} />
+
+                                    <div className="pass-icon"></div> 
+                                    </div> 
+                                    : 
+                                    <div> <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *" 
+                                    onChange={() => {
+                                        validarEmail();
+                                    }}
+                                    onBlur={() => {
+                                        ocultar('capax_l');
+                                        ocultar('capax_error');
+                                    }} />
+
+                                <div className="user-icon"></div>
+
+                                <input name="c" id="c" type="password" className="input password form-control"
+                                    placeholder="Clave *" 
+                                    onChange={() => {
+                                        validarClave();
+                                    }}
+                                    onBlur={() => {
+                                        ocultar('capax_c');
+                                        ocultar('capax_error');
+                                    }} />
+                                    
+                                <div className="pass-icon"></div>
+
+
+                                </div> }
+                                    
                                 </div>
 
                                 <div id="capax_l" style={{ display: "none" }} className="validacion">Debe ingresar el email</div>
@@ -209,7 +266,7 @@ export default function Login(props) {
                             </form>
 
                             <div className="footer" valign="bottom">
-                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"} className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)}
+                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"} className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)} 
                                 />
                             </div>
 
@@ -217,14 +274,14 @@ export default function Login(props) {
 
                     </div>
 
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="info_contacto col-12">
                             <div className="txt">
                                 <p className="mb-0">Tel&eacute;fono: (574) 000 00 00 | Direcci&oacute;n: Cra 0 Numero 100 Bloque0|
                                     Colombia</p>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </section>
             </section>
         </div>
