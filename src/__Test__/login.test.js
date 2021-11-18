@@ -1,3 +1,10 @@
-const ocultar = require('../Components/login')
+import React from 'react'
+import '@testing-library/jest-dom/extend-expect'
+import { render } from '@testing-library/react'
+import login from '../Components/login'
 
-describe('')
+test('renders content', ()=>{
+    const login = {
+        content: 'Este'
+    }
+})
