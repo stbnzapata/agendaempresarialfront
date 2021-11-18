@@ -67,10 +67,10 @@ export default function Login(props) {
     const [isRegistrando, setIsRegistrando] = React.useState(false);
     
     //Creación de nuevo usuario y validación de contraseñas
-    const crearUsuario = (correo, contraseña) =>{
+    const crearUsuario = (correo, contraseña) => {
         let clave = document.getElementById('c').value;
         let clave2 = document.getElementById('vc').value;
-
+    
         if (clave !== clave2) {
             alert("Error! Las contraseñas deben coincidir")
         } else {
@@ -101,8 +101,7 @@ export default function Login(props) {
                     capal.innerText = "El usuario ha sido creado con anterioridad por favor verifique.";
                 }
             });
-        }
-            
+        }            
     }
 
     const iniciarSesion = (correo, contraseña) => {
