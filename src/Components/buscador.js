@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'font-awesome/css/font-awesome.min.css';
 import '../css/header.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label} from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
 import { getContactos, saveContacto, getSearch } from '../services';
 import '../css/contactos.css';
 import Contactos from './contactos';
@@ -12,17 +12,17 @@ export default function Buscador() {
     const [show, setShow] = useState(false);
     const [contactos, setContactos] = useState([]);
     const [formValues, setFormValues] = useState({
-        Nombre:'',
-        Apellido:'',
-        Compañia:0,
-        Cargo:'',
-        Email:'',
-        Celular:'',
-        Direccion:'',
-        Ciudad:''
+        Nombre: '',
+        Apellido: '',
+        Compañia: 0,
+        Cargo: '',
+        Email: '',
+        Celular: '',
+        Direccion: '',
+        Ciudad: ''
     });
-    
-    const handleClose = () => { 
+
+    const handleClose = () => {
         setFormValues({});
         setShow(false);
     }
@@ -32,7 +32,7 @@ export default function Buscador() {
         try {
             const response = await getContactos();
             console.log(response)
-            if (response.status === 200){
+            if (response.status === 200) {
                 setContactos(response.data);
                 console.log(response.data);
             }
@@ -42,55 +42,48 @@ export default function Buscador() {
         }
     }
 
-    useEffect(() => {    
+    useEffect(() => {
         loadContactos();
     }, [])
 
     const handleChange = (event) => {
-        const {name, value} = event.target;        
-        setFormValues({...formValues, [name]: value});
+        const { name, value } = event.target;
+        setFormValues({ ...formValues, [name]: value });
     }
 
-    const _handleSubmit = (event) =>{
+    const _handleSubmit = (event) => {
         event.preventDefault();
-        handleSubmit({...formValues});        
+        handleSubmit({ ...formValues })
     }
 
-    const handleSubmit = async (data) =>{
-        try {                        
+    const handleSubmit = async (data) => {
+        try {
             await saveContacto(data);
             loadContactos();
             setFormValues({});
             setShow(false);
             alert('Los datos del contacto se han guardado satisfactoriamente.');            
         } catch (error) {
-            alert('Ha ocurrido un error guardando los datos del contacto.');
-        }                
+            alert('Ha ocurrido un error guardando los datos del contacto.')
+        }
+
     }
 
-    const search_handleSubmit = (event) =>{
+    const search_handleSubmit = (event) => {
         event.preventDefault();
         let parameter = document.getElementById('form1search').value;
-        searchContactos(parameter)  
-          
+        searchContactos(parameter)
+
     }
 
     async function searchContactos(parameter) {
-
-     
         try {
-        
             const response = await getSearch(parameter)
-
-            if (response.status === 200){
-                
+            if (response.status === 200) {
                 setContactos(response.data);
                 console.log(response.data)
-    
-               
             }
             return response
-            
         } catch (error) {
             console.log(error)
         }
@@ -103,7 +96,7 @@ export default function Buscador() {
                     <div className="buscador-e">
                         <div className="buscador col-2">
                             <div className="input-group">
-                                <div className="form-outline" style={{marginLeft:35}}>
+                                <div className="form-outline" style={{ marginLeft: 35 }}>
                                     <input type="search" id="form1search" className="form-control" />
                                 </div>
                                 <button onClick={search_handleSubmit} type="button" className="btn btn-primary">
@@ -111,7 +104,7 @@ export default function Buscador() {
                                 </button>
                             </div>
                         </div>
-                        
+
                         <div className="ingresar">
                             <Button id='botonVentanaModal' onClick={handleShow} type="button" className="btn btn-primary">
                                 Ingresar
@@ -124,10 +117,10 @@ export default function Buscador() {
                                         </div>
                                     </ModalHeader>
                                     <ModalBody>
-                                        
+
                                         <FormGroup>
                                             <Label for="nombre">Nombre</Label>
-                                            <Input type="text" id="nombre" name='Nombre' value={formValues.Nombre} onChange={handleChange}/>
+                                            <Input type="text" id="nombre" name='Nombre' value={formValues.Nombre} onChange={handleChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="apellido">Apellido</Label>
@@ -135,7 +128,7 @@ export default function Buscador() {
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="compañia">Compañia</Label>
-                                            <Input type="number" id="compañia" name='Compañia' value={formValues.Compañia} onChange={handleChange}/>
+                                            <Input type="number" id="compañia" name='Compañia' value={formValues.Compañia} onChange={handleChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="cargo">Cargo</Label>
@@ -147,31 +140,31 @@ export default function Buscador() {
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="movil">Celular</Label>
-                                            <Input type="number" id="movil" name='Celular' value={formValues.Celular} onChange={handleChange}/>
-                                        </FormGroup>                                    
+                                            <Input type="number" id="movil" name='Celular' value={formValues.Celular} onChange={handleChange} />
+                                        </FormGroup>
                                         <FormGroup>
                                             <Label for="direccion">Dirección</Label>
                                             <Input type="text" id="direccion" name='Direccion' value={formValues.Direccion} onChange={handleChange} />
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="ciudad">Ciudad</Label>
-                                            <Input type="text" id="ciudad" name='Ciudad' value={formValues.Ciudad} onChange={handleChange}/>
-                                        </FormGroup>                                   
-                                        
+                                            <Input type="text" id="ciudad" name='Ciudad' value={formValues.Ciudad} onChange={handleChange} />
+                                        </FormGroup>
+
                                     </ModalBody>
                                     <ModalFooter>
-                                        <Button onClick={_handleSubmit} type="button" className="btn btn-primary" style={{width:'100px'}}>
+                                        <Button onClick={_handleSubmit} type="button" className="btn btn-primary" style={{ width: '100px' }}>
                                             Guardar
                                         </Button>
                                         &nbsp;
-                                        <Button onClick={handleClose} type="button" className="btn btn-danger" style={{width:'100px'}}>
+                                        <Button onClick={handleClose} type="button" className="btn btn-danger" style={{ width: '100px' }}>
                                             Cerrar
                                         </Button>
-                                    </ModalFooter>                                
+                                    </ModalFooter>
                                 </Modal>
                             </form>
                         </div>
-                        <Contactos contactos={contactos} />            
+                        <Contactos contactos={contactos} />
                     </div>
                 </div>
             </div>
