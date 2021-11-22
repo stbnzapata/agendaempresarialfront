@@ -4,12 +4,13 @@ import Footer from './footer';
 import Header from './header';
 import Buscador from './buscador';
 
-export default function PaginaInicio() {
+export default function PaginaInicio() {    
     return (
         <div>
-           <Header/>
-           <Buscador/>    
-           <Footer/>
+        <Header/>
+        <Buscador/>    
+        <Footer/>
         </div>
     );
 }
+
