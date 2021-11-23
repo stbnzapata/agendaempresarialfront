@@ -13,7 +13,7 @@ export default function Header() {
     return (
         <div className="container-fluid vertical-encuentra mt-3">
             <section className="cont_header">
-                <header className="">
+                <header>
                     <nav className="cont_header_interior ">
                         <article className="logo_encabezado mt-3">
                             <div href="/#">
