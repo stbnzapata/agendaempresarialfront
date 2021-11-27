@@ -115,9 +115,9 @@ export default function Buscador() {
                         </div>
 
                         <div className="ingresar">
-                            <Button id='botonVentanaModal' onClick={handleShow} type="button" className="btn btn-primary">
+                            <button id='botonVentanaModal' onClick={handleShow} type="button" className="btn btn-primary">
                                 Ingresar
-                            </Button>
+                            </button>
                             <form id='formulario' onSubmit={_handleSubmit} handleSubmit={handleSubmit}>
                                 <Modal id='ventanaModal' isOpen={show} onHide={handleClose}>
                                     <ModalHeader>
