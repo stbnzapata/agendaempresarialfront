@@ -42,7 +42,6 @@ export async function saveContacto(contactoData){
 
 export async function getSearch(parameter){
 
-
     try {
         let ruta = baseUrl+ "?search=" + parameter;
         
@@ -58,3 +57,21 @@ export async function getSearch(parameter){
     }
 }
 
+
+
+export async function deleteContactos(idcontacto){
+
+    try {
+        let ruta = baseUrl + idcontacto + "/";
+        
+        const response = await Axios({
+            url: `${ruta}`,
+            method: 'DELETE',
+            
+        })
+        return response
+
+    } catch (error) {
+        console.log(error)
+    }
+}
