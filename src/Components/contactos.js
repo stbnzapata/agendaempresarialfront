@@ -4,11 +4,14 @@ import 'font-awesome/css/font-awesome.min.css';
 import '../css/contactos.css';
 import Buscador from './buscador';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
+import { deleteContactos } from '../services';
+import swal from 'sweetalert';
 
 const Contactos = ({ contactos }) => {
 
     const [showEditar, setShowEditar] = useState(false);
     const [formValues, setFormValues] = useState({
+       
         Nombre: '',
         Apellido: '',
         Compañia: 0,
@@ -19,9 +22,9 @@ const Contactos = ({ contactos }) => {
         Ciudad: ''
     });
 
-    const seleccionarContacto = (elemento) => {  
+    const seleccionarContacto = (elemento) => {
         setFormValues(elemento);
-        setShowEditar(true);  
+        setShowEditar(true);
     }
 
     const handleChange = (event) => {
@@ -32,6 +35,53 @@ const Contactos = ({ contactos }) => {
 
     const handleClose = () => {
         setShowEditar(false);
+    }
+
+    const handleDelete = (idcontacto) => {
+
+        swal({
+            title: '¿Eliminara un contato?',
+            text: 'Esta seguro, no hay vuelta atras!',
+            type: 'warning',
+            icon: 'warning',
+            buttons: ["No", "Si"]
+        }).then(respuesta =>{
+            // código que elimina
+            if(respuesta){
+                EliminarContacto(idcontacto);
+            }else{
+                swal(
+                    'Cancelaste la accion',
+                    'Muy bien que lo pensaste',
+                    'error'
+                )
+            }
+            
+        }
+
+    ) 
+    }
+
+    async function EliminarContacto(idcontacto) {
+        try {
+            const response = await deleteContactos(idcontacto)
+
+            if (response.status === 204) {
+
+                swal({
+                    title: 'Elimado!',
+                    text: "Contacto Eliminado Correctamente.",
+                    type: 'success',
+                }).then(function () {
+                    window.location.reload(true);
+                })
+
+                console.log(response.data)
+            }
+            return response
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     if (Buscador.length === []) {
@@ -48,6 +98,7 @@ const Contactos = ({ contactos }) => {
                         <table className="table table-bordered" border="0">
                             <thead>
                                 <tr>
+                                    
                                     <th style={{ width: 109 }}>Nombre</th>
                                     <th style={{ width: 109 }}>Apellido</th>
                                     <th style={{ width: 109 }}>Compañia</th>
@@ -61,6 +112,7 @@ const Contactos = ({ contactos }) => {
                             </thead>
                             <tbody>
                                 <tr>
+                            
                                     <td style={{ width: 109 }}>{elemento.Nombre}</td>
                                     <td style={{ width: 109 }}>{elemento.Apellido}</td>
                                     <td style={{ width: 109 }}>{elemento.Compañia}</td>
@@ -70,12 +122,12 @@ const Contactos = ({ contactos }) => {
                                     <td style={{ width: 109 }}>{elemento.Direccion}</td>
                                     <td style={{ width: 109 }}>{elemento.Ciudad}</td>
                                     <td style={{ width: 150, display: 'flex' }}>
-                                        <Button  value={elemento.id} id='botonVentanaModalEditar' onClick={()=>seleccionarContacto(elemento)} type="button" className="btn btn-primary" style={{ width: 50 }}>
+                                        <Button value={elemento.id} id='botonVentanaModalEditar' onClick={() => seleccionarContacto(elemento)} type="button" className="btn btn-primary" style={{ width: 50 }}>
                                             <i className="fa fa-edit"></i>
                                         </Button>
                                         <form id='formulario' >
-                                            <Modal id='ventanaModalEditar' isOpen={showEditar} onHide={handleClose} style={{marginBottom:0}}>
-                                                
+                                            <Modal id='ventanaModalEditar' isOpen={showEditar} onHide={handleClose} style={{ marginBottom: 0 }}>
+
                                                 <ModalHeader>
                                                     <div className="container" >
                                                         <h1 >Editar Contacto</h1>
@@ -83,6 +135,8 @@ const Contactos = ({ contactos }) => {
                                                 </ModalHeader>
 
                                                 <ModalBody>
+
+        
 
                                                     <FormGroup>
                                                         <Label for="nombre">Nombre</Label>
@@ -118,7 +172,7 @@ const Contactos = ({ contactos }) => {
                                                         <Label for="direccion">Dirección</Label>
                                                         <Input type="text" id="direccion" name='Direccion' value={formValues && formValues.Direccion} onChange={handleChange} />
                                                     </FormGroup>
-                                                    
+
                                                     <FormGroup>
                                                         <Label for="ciudad">Ciudad</Label>
                                                         <Input type="text" id="ciudad" name='Ciudad' value={formValues && formValues.Ciudad} onChange={handleChange} />
@@ -127,7 +181,7 @@ const Contactos = ({ contactos }) => {
                                                 </ModalBody>
 
                                                 <ModalFooter>
-                                                    <Button type="button" className="btn btn-primary" style={{ width: '100px' }}>
+                                                    <Button type="button" className="btn btn-dark" style={{ width: '100px' }}>
                                                         Guardar
                                                     </Button>
                                                     &nbsp;
@@ -138,9 +192,14 @@ const Contactos = ({ contactos }) => {
                                             </Modal>
                                         </form>
                                         &nbsp;
-                                        <Button className="btn btn-danger" style={{ width: 50 }}>
+                                        <Button
+                                            value={elemento.id}
+                                            onClick={() => handleDelete(elemento.id)}
+                                            className="btn btn-danger" style={{ width: 50 }}>
                                             <i className="fa fa-trash"></i>
                                         </Button>
+
+
                                     </td>
                                 </tr>
                             </tbody>

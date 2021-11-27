@@ -6,6 +6,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, L
 import { getContactos, saveContacto, getSearch } from '../services';
 import '../css/contactos.css';
 import Contactos from './contactos';
+import swal  from 'sweetalert';
 
 export default function Buscador() {
 
@@ -62,9 +63,9 @@ export default function Buscador() {
             loadContactos();
             setFormValues({});
             setShow(false);
-            alert('Los datos del contacto se han guardado satisfactoriamente.');            
+            swal('Los datos del contacto se han guardado satisfactoriamente.');            
         } catch (error) {
-            alert('Ha ocurrido un error guardando los datos del contacto.')
+            swal('Ha ocurrido un error guardando los datos del contacto.')
         }
 
     }
@@ -80,16 +81,24 @@ export default function Buscador() {
         try {
             const response = await getSearch(parameter)
             if (response.status === 200) {
-                setContactos(response.data);
+                if(response.data != ""){
+                    setContactos(response.data);
+                }else{
+                    swal('No se encontraron resultados')
+                }
                 console.log(response.data)
+               
+                
             }
             return response
         } catch (error) {
+          
             console.log(error)
         }
     }
 
     return (
+    
         <div>
             <div className="container bus-btn">
                 <div className="row">

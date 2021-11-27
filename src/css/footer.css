@@ -5,6 +5,7 @@
     margin: 3% 0 0 0;
 }
 
+
 footer {
     width: 90%;
     margin: auto;
@@ -26,6 +27,4 @@ footer {
     font-size: 1em;
     text-align: center;
     font-weight: 600;
-    margin-top: 117%;
-    position: relative;
 }
