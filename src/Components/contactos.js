@@ -201,7 +201,6 @@ const Contactos = ({ contactos }) => {
                     </tbody>
                 </table>
             </div>
-
         );
     }
 }
