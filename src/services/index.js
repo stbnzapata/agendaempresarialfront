@@ -57,8 +57,6 @@ export async function getSearch(parameter){
     }
 }
 
-
-
 export async function deleteContactos(idcontacto){
 
     try {
