@@ -14,8 +14,10 @@ export function valAcceso(forma, param) {
     let valido = document.getElementById('capax_c');
     if (password) {
         if (password.length < 8) {
-            valido.style.display = "";
-            valido.innerText = "La contraseña debe contener mas de 8 caracteres";
+
+            // valido.style.display = "";
+            // valido.innerText = "La contraseña debe contener mas de 8 caracteres";
+
 
         } else {
             valido.style.display = "none";
@@ -80,43 +82,43 @@ export function ocultar(capa) {
 export default function Login(props) {
 
     const [isRegistrando, setIsRegistrando] = React.useState(false);
-    
+
     //Creación de nuevo usuario y validación de contraseñas
     const crearUsuario = (correo, contraseña) => {
         let clave = document.getElementById('c').value;
         let clave2 = document.getElementById('vc').value;
-    
+
         if (clave !== clave2) {
             alert("Error! Las contraseñas deben coincidir")
         } else {
             app
-            .auth()
-            .createUserWithEmailAndPassword(correo, contraseña)
-            .then((usuarioFirebase) => {
-                console.log('Usuario Creado: ', usuarioFirebase);
-                props.setUsuario(usuarioFirebase);  
-                alert('Su usuario ha sido creado satisfactoriamente, apartir de este momento puede ingresar a la aplicacion.')  
-            }).catch((error)=>{
-                
-                //alert('El usuario ha sido creado con anterioridad por favor verifique.')
-                
-                //Alerta para que no nos dejen campos vacíos
-                let email = document.getElementById('l').value;
-                let clave = document.getElementById('c').value;
-                let clave2 = document.getElementById('vc').value;
-                
-                if(!email || !clave || !clave2){
-                    alert("Los campos no pueden quedar vacíos");
-                }else{
-                    let errorCode = error.code;
-                    let errorMessage = error.message;
-                    console.log(errorCode, errorMessage)
-                    let capal = document.getElementById('capax_l');
-                    capal.style.display = "";
-                    capal.innerText = "El usuario ha sido creado con anterioridad por favor verifique.";
-                }
-            });
-        }            
+                .auth()
+                .createUserWithEmailAndPassword(correo, contraseña)
+                .then((usuarioFirebase) => {
+                    console.log('Usuario Creado: ', usuarioFirebase);
+                    props.setUsuario(usuarioFirebase);
+                    alert('Su usuario ha sido creado satisfactoriamente, apartir de este momento puede ingresar a la aplicacion.')
+                }).catch((error) => {
+
+                    //alert('El usuario ha sido creado con anterioridad por favor verifique.')
+
+                    //Alerta para que no nos dejen campos vacíos
+                    let email = document.getElementById('l').value;
+                    let clave = document.getElementById('c').value;
+                    let clave2 = document.getElementById('vc').value;
+
+                    if (!email || !clave || !clave2) {
+                        alert("Los campos no pueden quedar vacíos");
+                    } else {
+                        let errorCode = error.code;
+                        let errorMessage = error.message;
+                        console.log(errorCode, errorMessage)
+                        let capal = document.getElementById('capax_l');
+                        capal.style.display = "";
+                        capal.innerText = "El usuario ha sido creado con anterioridad por favor verifique.";
+                    }
+                });
+        }
     }
 
     const iniciarSesion = (correo, contraseña) => {
@@ -150,6 +152,7 @@ export default function Login(props) {
         const correo = e.target.l.value;
         const contraseña = e.target.c.value;
         console.log(correo, contraseña);
+
         if (isRegistrando) {
             crearUsuario(correo, contraseña);
         }
@@ -185,7 +188,7 @@ export default function Login(props) {
 
                 <section className="container">
                     <div className="row justify-content-around">
-                        <div id="wrapper" className="col-lg-4 col-md-12" style={{marginBottom:75}}>
+                        <div id="wrapper" className="col-lg-4 col-md-12" style={{ marginBottom: 75 }}>
 
                             <form action="" method="post" name="forml" id="forml" className="login-form" onSubmit={submitHandler}>
 
@@ -195,11 +198,11 @@ export default function Login(props) {
 
                                 <h6 className="mb-2">{isRegistrando ? "REGISTRO" : "INICIO DE SESION"}</h6>
 
-                                <div className="content">{isRegistrando ? 
-                                
-                                    <div>  
-                                
-                                        <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *" 
+                                <div className="content">{isRegistrando ?
+
+                                    <div>
+
+                                        <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *"
                                             onChange={() => {
                                                 validarEmail();
                                             }}
@@ -211,7 +214,7 @@ export default function Login(props) {
                                         <div className="user-icon"></div>
 
                                         <input name="c" id="c" type="password" className="input password form-control"
-                                            placeholder="Clave *" 
+                                            placeholder="Clave *"
                                             onChange={() => {
                                                 validarClave();
                                             }}
@@ -219,47 +222,48 @@ export default function Login(props) {
                                                 ocultar('capax_c');
                                                 ocultar('capax_error');
                                             }} />
-                                            
+
                                         <div className="pass-icon"></div>
 
                                         <input name="vc" id="vc" type="password" className="input password form-control"
-                                            placeholder="Confirmar Clave *" 
+                                            placeholder="Confirmar Clave *"
                                             onChange={() => {
-                                                validarClave();                                            
+                                                validarClave();
                                             }}
                                             onBlur={() => {
                                                 ocultar('capax_vc');
                                                 ocultar('capax_error');
                                             }} />
 
-                                        <div className="pass-icon"></div> 
-                                        </div> 
-                                        : 
-                                        <div> <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *" 
-                                        onChange={() => {
-                                            validarEmail();
-                                        }}
-                                        onBlur={() => {
-                                            ocultar('capax_l');
-                                            ocultar('capax_error');
-                                        }} />
+                                        <div className="pass-icon"></div>
+                                    </div>
+                                    :
+                                    <div>
+                                        <input name="l" id="l" type="text" className="input username form-control" placeholder="Email *"
+                                            onChange={() => {
+                                                validarEmail();
+                                            }}
+                                            onBlur={() => {
+                                                ocultar('capax_l');
+                                                ocultar('capax_error');
+                                            }} />
 
                                         <div className="user-icon"></div>
 
                                         <input name="c" id="c" type="password" className="input password form-control"
-                                        placeholder="Clave *" 
-                                        onChange={() => {
-                                            validarClave();
-                                        }}
-                                        onBlur={() => {
-                                            ocultar('capax_c');
-                                            ocultar('capax_error');
-                                        }} />
-                                        
+                                            placeholder="Clave *"
+                                            onChange={() => {
+                                                validarClave();
+                                            }}
+                                            onBlur={() => {
+                                                ocultar('capax_c');
+                                                ocultar('capax_error');
+                                            }} />
+
                                         <div className="pass-icon"></div>
 
-                                    </div> }
-                                    
+                                    </div>}
+
                                 </div>
 
                                 <div id="capax_l" style={{ display: "none" }} className="validacion">Debe ingresar el email</div>
@@ -277,8 +281,8 @@ export default function Login(props) {
 
                             </form>
 
-                            <div   className="footer" valign="bottom">
-                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?" } className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)} 
+                            <div className="footer" valign="bottom">
+                                <input type="button" name="botonera" value={isRegistrando ? "Ya tienes cuenta?" : "No tienes cuenta?"} className="btn btn-dark mt-5" onClick={() => setIsRegistrando(!isRegistrando)}
                                 />
                             </div>
 

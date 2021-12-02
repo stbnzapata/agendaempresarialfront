@@ -11,24 +11,34 @@ export default function Header() {
     }
 
     return (
-        <div className="container-fluid vertical-encuentra mt-3">
-            <section className="cont_header">
-                <header>
-                    <nav className="cont_header_interior ">
-                        <article className="logo_encabezado mt-3">
-                            <div href="/#">
-                                <img src={logo} alt="Logo" />
-                            </div>
-                        </article>
-                        <article className="nom mt-4">
-                            <h1 className="name">Agenda Empresarial</h1>
-                        </article>
-                        <article className="btn_cerrar mt-4 nav-item">
-                            <button type="button" className="btn btn-danger" onClick={cerrarSesion}>Cerrar Sesion</button>
-                        </article>
-                    </nav>
-                </header>
-            </section>
+
+        <div >
+            <nav className="barra_color">
+
+                <p class="nombre">Agenda Empresarial</p>
+                <button type="button" className="btn btn-danger" onClick={cerrarSesion}>Cerrar Sesion</button>
+
+            </nav>
         </div>
+
+        // <div className="container-fluid vertical-encuentra mt-3">
+        //     <section className="cont_header">
+        //         <header>
+        //             <nav className="cont_header_interior ">
+        //                 <article className="logo_encabezado mt-3">
+        //                     <div href="/#">
+        //                         <img src={logo} alt="Logo" />
+        //                     </div>
+        //                 </article>
+        //                 <article className="nom mt-4">
+        //                     <h1 className="name">Agenda Empresarial</h1>
+        //                 </article>
+        //                 <article className="btn_cerrar mt-4 nav-item">
+        //                     <button type="button" className="btn btn-danger" onClick={cerrarSesion}>Cerrar Sesion</button>
+        //                 </article>
+        //             </nav>
+        //         </header>
+        //     </section>
+        // </div>
     );
 }

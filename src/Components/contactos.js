@@ -4,14 +4,15 @@ import 'font-awesome/css/font-awesome.min.css';
 import '../css/contactos.css';
 import Buscador from './buscador';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap';
-import { deleteContactos } from '../services';
+import { deleteContactos, updateContactos, getContactos } from '../services';
 import swal from 'sweetalert';
+
+
 
 const Contactos = ({ contactos }) => {
 
     const [showEditar, setShowEditar] = useState(false);
     const [formValues, setFormValues] = useState({
-
         Nombre: '',
         Apellido: '',
         Compañia: 0,
@@ -22,10 +23,76 @@ const Contactos = ({ contactos }) => {
         Ciudad: ''
     });
 
+    // async function loadContactos() {
+    //     try {
+    //         const response = await getContactos();
+    //         if (response.status === 200) {
+
+    //             //setContactos(response.data);
+
+    //         }
+    //         return response
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }
+
     const seleccionarContacto = (elemento) => {
+
         setFormValues(elemento);
         setShowEditar(true);
+
     }
+
+    
+
+    async function actualizarContacto() {
+        
+        //variables del formulario
+        var id = document.getElementById("id").value;
+        var nombre = document.getElementById("nombre").value;
+        var apellido = document.getElementById("apellido").value;
+        var compania = document.getElementById("compania").value;
+        var cargo = document.getElementById("cargo").value;
+        var email = document.getElementById("email").value;
+        var movil = document.getElementById("movil").value;
+        var direccion = document.getElementById("direccion").value;
+        var ciudad = document.getElementById("ciudad").value;
+
+        var datos = [
+            id,
+            nombre,
+            apellido,
+            compania,
+            cargo,
+            email,
+            movil,
+            direccion,
+            ciudad,
+        ] ; 
+
+       
+       
+        try {
+            const response = await updateContactos(datos)
+            if (response.status === 200) {
+                swal({
+                    title: '¡Actualizado!',
+                    text: "Contacto Actualizado Correctamente.",
+                    type: 'success',
+                }).then(function () {
+                    //setShowEditar(false);
+                    //loadContactos();
+                    window.location.reload(true);
+                })
+                console.log(response.data)
+            }
+            return response
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -149,6 +216,7 @@ const Contactos = ({ contactos }) => {
                                 <FormGroup>
                                     <Label for="nombre">Nombre</Label>
                                     <Input type="text" id="nombre" name='Nombre' value={formValues && formValues.Nombre} onChange={handleChange} />
+                                    <Input type="hidden" id="id" name='id' value={formValues && formValues.id} onChange={handleChange} />
                                 </FormGroup>
 
                                 <FormGroup>
@@ -158,7 +226,7 @@ const Contactos = ({ contactos }) => {
 
                                 <FormGroup>
                                     <Label for="compañia">Compañia</Label>
-                                    <Input type="number" id="compañia" name='Compañia' value={formValues && formValues.Compañia} onChange={handleChange} />
+                                    <Input type="number" id="compania" name='Compañia' value={formValues && formValues.Compañia} onChange={handleChange} />
                                 </FormGroup>
 
                                 <FormGroup>
@@ -189,7 +257,7 @@ const Contactos = ({ contactos }) => {
                             </ModalBody>
 
                             <ModalFooter>
-                                <Button type="button" className="btn btn-primary" style={{ width: '100px' }}>
+                                <Button type="button" onClick={actualizarContacto} className="btn btn-primary" style={{ width: '100px' }}>
                                     Guardar
                                 </Button>
                                 &nbsp;

@@ -48,8 +48,10 @@ export default function Buscador() {
     }, [])
 
     const handleChange = (event) => {
+
         const { name, value } = event.target;
         setFormValues({ ...formValues, [name]: value });
+
     }
 
     const _handleSubmit = (event) => {
@@ -79,8 +81,12 @@ export default function Buscador() {
     async function searchContactos(parameter) {
         try {
             const response = await getSearch(parameter)
+
+            console.log(response.data)
+
             if (response.status === 200) {
-                if (response.data !== "") {
+                
+                if (response.data != "") {
                     setContactos(response.data);
                 } else {
                     swal('No se encontraron resultados')
@@ -103,7 +109,7 @@ export default function Buscador() {
                                 <div className="form-outline" style={{ marginLeft: 35 }}>
                                     <input type="search" id="form1search" className="form-control" />
                                 </div>
-                                <button onClick={search_handleSubmit} type="button" className="btn btn-primary">
+                                <button onClick={search_handleSubmit} type="button" className="btn btn-primary" >
                                     Buscar
                                 </button>
                             </div>
